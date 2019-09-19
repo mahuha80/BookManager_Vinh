@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh.model;
+package com.example.bookmanager_vinh;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BookManager_Vinh</string>
+    <string name="labelMain">QUẢN LÍ SÁCH</string>
 </resources>

@@ -1,12 +1,11 @@
-package com.example.bookmanager_vinh.model;
+package com.example.bookmanager_vinh;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-
-import com.example.bookmanager_vinh.R;
+import android.widget.Toast;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -17,7 +16,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         CountDownTimer countDownTimer=new CountDownTimer(1500,1500) {
             @Override
             public void onTick(long l) {
-            }
+                Toast.makeText(SplashScreenActivity.this, "onTick", Toast.LENGTH_SHORT).show();
+
+                }
 
             @Override
             public void onFinish() {
