@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">BookManager_Vinh</string>
     <string name="labelMain">QUẢN LÍ SÁCH</string>
+    <string name="qlyNguoiDungTitle">NGƯỜI DÙNG</string>
+    <string name="themSachTitle">THÊM SÁCH</string>
+    <string name="qLySachTitle">QUẢN LÝ SÁCH</string>
+    <string name="nguoiDungTitle">NGƯỜI DÙNG</string>
+    <string name="hoaDonTitle">HÓA ĐƠN</string>
+    <string name="theLoaiTitle">THỂ LOẠI</string>
 </resources>

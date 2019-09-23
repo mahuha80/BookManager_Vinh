@@ -9,16 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".SplashScreenActivity" >
+        <activity android:name=".ThemSachActivity" android:label="@string/themSachTitle"></activity>
+        <activity android:name=".QLySachActivity" android:label="@string/qLySachTitle"/>
+        <activity android:name=".QLyHoaDonActivity" android:label="@string/hoaDonTitle"/>
+        <activity android:name=".QLyLoaiSachActivity" android:label="@string/theLoaiTitle" />
+        <activity android:name=".UserActivity" android:label="@string/nguoiDungTitle"/>
+        <activity android:name=".QLyNguoiDungActivity" android:label="@string/qlyNguoiDungTitle" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:label="@string/labelMain">
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/labelMain" />
     </application>
 
 </manifest>

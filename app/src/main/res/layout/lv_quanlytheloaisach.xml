@@ -9,13 +9,13 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/cateicon"
-            android:id="@+id/img"
+            android:id="@+id/imgSach"
             android:layout_marginRight="8dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:orientation="vertical"
-            android:layout_toRightOf="@id/img"
+            android:layout_toRightOf="@id/imgSach"
             android:weightSum="2">
             <TextView
                 android:layout_width="wrap_content"
