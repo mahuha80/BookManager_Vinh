@@ -14,7 +14,7 @@
         <activity android:name=".ui.QLyHoaDonActivity" android:label="@string/hoaDonTitle"/>
         <activity android:name=".ui.QLyLoaiSachActivity" android:label="@string/theLoaiTitle" />
         <activity android:name=".ui.NguoiDungActivity" android:label="@string/nguoiDungTitle"/>
-        <activity android:name=".ui.QLyNguoiDungActivity" android:label="@string/qlyNguoiDungTitle" />
+        <activity android:name=".ui.ThemNguoiDungActivity" android:label="@string/qlyNguoiDungTitle" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>

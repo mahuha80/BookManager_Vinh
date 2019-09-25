@@ -8,17 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
+import com.example.bookmanager_vinh.model.NguoiDung;
+
+import java.util.List;
 
 public class DanhSachNguoiDungAdapter extends BaseAdapter {
     private Context context;
+    private List<NguoiDung> listNguoiDung;
 
-    public DanhSachNguoiDungAdapter(Context context) {
+    public DanhSachNguoiDungAdapter(Context context, List<NguoiDung> listNguoiDung) {
         this.context = context;
+        this.listNguoiDung = listNguoiDung;
     }
 
     @Override
     public int getCount() {
-        return 20;
+        return listNguoiDung.size();
     }
 
     @Override
@@ -43,8 +48,8 @@ public class DanhSachNguoiDungAdapter extends BaseAdapter {
         }else{
             nguoiDungHolder= (NguoiDungHolder) view.getTag();
         }
-        nguoiDungHolder.tvSoDienThoai.setText("0987395971");
-        nguoiDungHolder.tvTen.setText("Nguyen Thanh Vinh");
+        nguoiDungHolder.tvSoDienThoai.setText(listNguoiDung.get(i).getPhone());
+        nguoiDungHolder.tvTen.setText(listNguoiDung.get(i).getUsername());
 
         return view;
     }
