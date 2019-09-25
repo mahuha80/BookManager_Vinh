@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,13 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
-public class UserActivity extends AppCompatActivity {
+import com.example.bookmanager_vinh.R;
+import com.example.bookmanager_vinh.adapter.DanhSachNguoiDungAdapter;
+
+public class NguoiDungActivity extends AppCompatActivity {
+    ListView lvNguoiDung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        lvNguoiDung=findViewById(R.id.lvNguoiDung);
+        lvNguoiDung.setAdapter(new DanhSachNguoiDungAdapter(this));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,12 +33,12 @@ public class UserActivity extends AppCompatActivity {
         int id=item.getItemId();
         switch (id){
             case R.id.add_option:
-                startActivity(new Intent(UserActivity.this, QLyNguoiDungActivity.class));
+                startActivity(new Intent(NguoiDungActivity.this, QLyNguoiDungActivity.class));
                 break;
             case R.id.changePass_option:
                 break;
             case R.id.logOut_option:
-                startActivity(new Intent(UserActivity.this,LoginActivity.class));
+                startActivity(new Intent(NguoiDungActivity.this,LoginActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

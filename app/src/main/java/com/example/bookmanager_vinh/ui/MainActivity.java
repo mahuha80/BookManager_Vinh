@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.bookmanager_vinh.R;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imgNguoiDung, imgTheLoai,imgHoaDon,imgSach;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         imgNguoiDung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UserActivity.class));
+                startActivity(new Intent(MainActivity.this, NguoiDungActivity.class));
             }
         });
         imgTheLoai.setOnClickListener(new View.OnClickListener() {

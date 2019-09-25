@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.Toast;
+
+import com.example.bookmanager_vinh.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

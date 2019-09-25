@@ -21,7 +21,7 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/tvTenSach"
+                android:id="@+id/tvSTT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thanh Vinh"
@@ -30,7 +30,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/tvSoLuong"
+                android:id="@+id/tvNgayThangNam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"

@@ -1,8 +1,10 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.bookmanager_vinh.R;
 
 public class QLyLoaiSachActivity extends AppCompatActivity {
 

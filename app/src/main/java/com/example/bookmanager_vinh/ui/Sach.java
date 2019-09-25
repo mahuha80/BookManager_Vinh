@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 public class Sach {
     private String tenSach;

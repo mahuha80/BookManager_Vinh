@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.Sach;
+import com.example.bookmanager_vinh.ui.Sach;
 
 import java.util.List;
 
@@ -43,8 +43,8 @@ public class QLySachAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
             sachHolder=new SachHolder();
-            sachHolder.tvTenSach=view.findViewById(R.id.tvTenSach);
-            sachHolder.tvSoLuong=view.findViewById(R.id.tvSoLuong);
+            sachHolder.tvTenSach=view.findViewById(R.id.tvSTT);
+            sachHolder.tvSoLuong=view.findViewById(R.id.tvNgayThangNam);
             sachHolder.imgDel=view.findViewById(R.id.imgXoa);
             view.setTag(sachHolder);
         }else{

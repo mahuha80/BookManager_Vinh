@@ -5,12 +5,11 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.Sach;
+import com.example.bookmanager_vinh.ui.Sach;
 
 import java.util.List;
 

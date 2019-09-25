@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".QLyNguoiDungActivity">
+    tools:context=".ui.QLyNguoiDungActivity">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Tên Đăng Nhập"
-        android:inputType="textPassword" />
+        android:inputType="text" />
 
     <EditText
         android:layout_width="match_parent"
@@ -31,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Nhắc lại mật khẩu" />
+        android:hint="Nhắc lại mật khẩu"
+        android:inputType="textPassword"/>
 
     <EditText
         android:layout_width="match_parent"

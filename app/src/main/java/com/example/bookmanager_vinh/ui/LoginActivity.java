@@ -1,4 +1,4 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.bookmanager_vinh.R;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;

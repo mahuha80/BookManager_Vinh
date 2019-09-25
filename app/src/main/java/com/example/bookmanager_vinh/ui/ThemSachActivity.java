@@ -1,10 +1,11 @@
-package com.example.bookmanager_vinh;
+package com.example.bookmanager_vinh.ui;
 
 import android.os.Bundle;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.ThemSachAdapter;
 
 import java.util.ArrayList;
