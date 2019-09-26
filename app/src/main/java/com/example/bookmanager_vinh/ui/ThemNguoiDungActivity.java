@@ -1,6 +1,5 @@
 package com.example.bookmanager_vinh.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,13 +42,14 @@ public class ThemNguoiDungActivity extends AppCompatActivity {
         boolean isInsertTrue = nguoiDungDAO.insertNguoiDung(nguoiDung);
         if (isInsertTrue) {
             Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void danhSachNguoiDung(View view) {
-        startActivity(new Intent(ThemNguoiDungActivity.this, NguoiDungActivity.class));
+        finish();
     }
 
     private void init() {

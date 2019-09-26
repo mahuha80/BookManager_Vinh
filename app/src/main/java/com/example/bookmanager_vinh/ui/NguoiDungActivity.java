@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -12,18 +13,27 @@ import android.widget.ListView;
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.DanhSachNguoiDungAdapter;
 import com.example.bookmanager_vinh.dao.NguoiDungDAO;
+import com.example.bookmanager_vinh.model.NguoiDung;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NguoiDungActivity extends AppCompatActivity {
     ListView lvNguoiDung;
     NguoiDungDAO nguoiDungDAO;
+    List<NguoiDung> listNguoiDung;
+    DanhSachNguoiDungAdapter danhSachNguoiDungAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        nguoiDungDAO=new NguoiDungDAO(NguoiDungActivity.this);
         lvNguoiDung=findViewById(R.id.lvNguoiDung);
-        lvNguoiDung.setAdapter(new DanhSachNguoiDungAdapter(this,nguoiDungDAO.getListNguoiDung()));
+        nguoiDungDAO=new NguoiDungDAO(NguoiDungActivity.this);
+        listNguoiDung=new ArrayList<>();
+        listNguoiDung=nguoiDungDAO.getListNguoiDung();
+       danhSachNguoiDungAdapter= new DanhSachNguoiDungAdapter(this,listNguoiDung);
+        lvNguoiDung.setAdapter(danhSachNguoiDungAdapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,5 +55,34 @@ public class NguoiDungActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("VONGDOI","onstop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("VONG DOI","onstop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("VONGDOI","onrestart");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("VONGDOI","ONRESUME");
+        listNguoiDung.clear();
+        listNguoiDung=nguoiDungDAO.getListNguoiDung();
+        danhSachNguoiDungAdapter.changeDataset(listNguoiDung);
+
     }
 }

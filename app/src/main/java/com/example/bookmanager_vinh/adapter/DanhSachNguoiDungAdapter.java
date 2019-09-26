@@ -56,4 +56,13 @@ public class DanhSachNguoiDungAdapter extends BaseAdapter {
     public class NguoiDungHolder{
         TextView tvTen,tvSoDienThoai;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+    public void changeDataset(List<NguoiDung> nguoiDungList){
+        this.listNguoiDung=nguoiDungList;
+        notifyDataSetChanged();
+    }
 }
