@@ -9,12 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ThemSachActivity" android:label="@string/themSachTitle"></activity>
-        <activity android:name=".ui.QLySachActivity" android:label="@string/qLySachTitle"/>
-        <activity android:name=".ui.QLyHoaDonActivity" android:label="@string/hoaDonTitle"/>
-        <activity android:name=".ui.QLyLoaiSachActivity" android:label="@string/theLoaiTitle" />
-        <activity android:name=".ui.NguoiDungActivity" android:label="@string/nguoiDungTitle"/>
-        <activity android:name=".ui.ThemNguoiDungActivity" android:label="@string/qlyNguoiDungTitle" />
+        <activity android:name=".ui.DoiMatKhauActivity"></activity>
+        <activity
+            android:name=".ui.ThemSachActivity"
+            android:label="@string/themSachTitle" />
+        <activity
+            android:name=".ui.QLySachActivity"
+            android:label="@string/qLySachTitle" />
+        <activity
+            android:name=".ui.QLyHoaDonActivity"
+            android:label="@string/hoaDonTitle" />
+        <activity
+            android:name=".ui.QLyLoaiSachActivity"
+            android:label="@string/theLoaiTitle" />
+        <activity
+            android:name=".ui.NguoiDungActivity"
+            android:label="@string/nguoiDungTitle" />
+        <activity
+            android:name=".ui.ThemNguoiDungActivity"
+            android:label="@string/qlyNguoiDungTitle" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>

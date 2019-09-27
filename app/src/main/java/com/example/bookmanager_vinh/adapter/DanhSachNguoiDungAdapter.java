@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -50,6 +52,9 @@ public class DanhSachNguoiDungAdapter extends BaseAdapter {
         }
         nguoiDungHolder.tvSoDienThoai.setText(listNguoiDung.get(i).getPhone());
         nguoiDungHolder.tvTen.setText(listNguoiDung.get(i).getUsername());
+        Animation animation=AnimationUtils.loadAnimation(context,R.anim.animation_listview);
+        view.setAnimation(animation);
+        view.startAnimation(animation);
 
         return view;
     }

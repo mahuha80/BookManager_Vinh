@@ -44,7 +44,7 @@ public class NguoiDungDAO {
         return true;
     }
 
-    public List<NguoiDung> getListNguoiDung() {
+    public List<NguoiDung> getAllNguoiDung() {
         List<NguoiDung> list = new ArrayList<>();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();
@@ -57,6 +57,9 @@ public class NguoiDungDAO {
             cursor.moveToNext();
         }
         return list;
+    }
+    public int xoaNguoiDung(String tenNguoiDung){
+        return db.delete(TABLE_NAME,"username=?",new String[]{tenNguoiDung});
     }
 
 
