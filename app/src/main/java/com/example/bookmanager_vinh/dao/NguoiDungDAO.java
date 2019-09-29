@@ -60,14 +60,20 @@ public class NguoiDungDAO {
     }
 
     public int xoaNguoiDung(String tenNguoiDung) {
+        if(tenNguoiDung.equals("admin")) return -1;
         return db.delete(TABLE_NAME, "username=?", new String[]{tenNguoiDung});
     }
 
-//    public int updateNguoiDung(String username) {
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("username",);
-//        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{username});
-//    }
+    public int updateNguoiDung(NguoiDung nd) {
+        if(nd.getUsername().equals("admin")) return -1;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", nd.getUsername());
+        contentValues.put("password", nd.getPass());
+        contentValues.put("phone", nd.getPhone());
+        contentValues.put("hoten", nd.getFullname());
+        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{nd.getUsername()});
+    }
+
 
 
 }

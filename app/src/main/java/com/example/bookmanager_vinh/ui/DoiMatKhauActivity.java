@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,25 +32,38 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doi_mat_khau);
         init();
         Intent intent = getIntent();
-        String tenNguoiDung = intent.getStringExtra("tenNguoiDung");
-        if(tenNguoiDung!=null){
-            edTenDangNhap.setText(tenNguoiDung);
-        }
+        Bundle bundle = intent.getBundleExtra("bundle");
+        final NguoiDung nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
+        edTenDangNhap.setText(nguoiDung.getUsername());
 
 
         nguoiDungList = nguoiDungDAO.getAllNguoiDung();
         for (int i = 0; i < nguoiDungList.size(); i++) {
-            String nguoiDung = nguoiDungList.get(i).getUsername();
-            listTenNguoiDung.add(nguoiDung);
+            String tenNguoiDung = nguoiDungList.get(i).getUsername();
+            listTenNguoiDung.add(tenNguoiDung);
         }
 
         edTenDangNhap.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listTenNguoiDung));
         btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tenDangNhap = edTenDangNhap.getText().toString();
-                String matKhau = edMatKhau.getText().toString();
-                String nhacLaiMatKhau = edNhacLaiMatKhau.getText().toString();
+                if (!edTenDangNhap.getText().toString().equals(nguoiDung.getUsername())) {
+                    Toast.makeText(DoiMatKhauActivity.this, "Vui lòng không thay đổi tên đăng nhập !", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!edMatKhau.getText().toString().equals(edNhacLaiMatKhau.getText().toString())) {
+                    Toast.makeText(DoiMatKhauActivity.this, "Vui lòng nhập mật khẩu trùng nhau !", Toast.LENGTH_SHORT).show();
+                    return;
+
+                } else {
+                    String matKhau = edMatKhau.getText().toString();
+                    NguoiDung nguoiDung1=new NguoiDung(nguoiDung.getUsername(),matKhau,nguoiDung.getPhone(),nguoiDung.getFullname());
+                    if(nguoiDungDAO.updateNguoiDung(nguoiDung1)>0){
+                        Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu thành công !", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu không thành công !", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
 
 
             }

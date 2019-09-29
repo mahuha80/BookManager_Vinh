@@ -1,6 +1,8 @@
 package com.example.bookmanager_vinh.model;
 
-public class NguoiDung {
+import java.io.Serializable;
+
+public class NguoiDung implements Serializable{
     private String username;
     private String pass;
     private String phone;
@@ -19,6 +21,7 @@ public class NguoiDung {
         this.phone = "123456";
         this.fullname = "no name";
     }
+
 
     public String getUsername() {
         return username;

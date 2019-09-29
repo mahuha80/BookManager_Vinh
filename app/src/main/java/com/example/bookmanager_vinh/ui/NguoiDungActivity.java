@@ -27,8 +27,8 @@ public class NguoiDungActivity extends AppCompatActivity {
     NguoiDungDAO nguoiDungDAO;
     List<NguoiDung> listNguoiDung;
     DanhSachNguoiDungAdapter danhSachNguoiDungAdapter;
-    String itemSelected = "";
     int position;
+    NguoiDung nguoiDungSelect=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,10 @@ public class NguoiDungActivity extends AppCompatActivity {
         lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                itemSelected = listNguoiDung.get(i).getUsername();
-                position = i;
-                Log.e("ERROR1", itemSelected + "");
+                position=i;
                 Log.e("ERROR1", position + "");
+                nguoiDungSelect=listNguoiDung.get(i);
+                Log.e("ERROR1",nguoiDungSelect+"");
 
             }
         });
@@ -88,7 +88,7 @@ public class NguoiDungActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.xoa:
-                int result = nguoiDungDAO.xoaNguoiDung(itemSelected);
+                int result = nguoiDungDAO.xoaNguoiDung(nguoiDungSelect.getUsername());
                 if (result > 0) {
                     Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     listNguoiDung.remove(position);
@@ -101,7 +101,9 @@ public class NguoiDungActivity extends AppCompatActivity {
             case R.id.sua:
                 Toast.makeText(this, "Sua", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(NguoiDungActivity.this,DoiMatKhauActivity.class);
-                intent.putExtra("tenNguoiDung",itemSelected);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("NguoiDung",nguoiDungSelect);
+                intent.putExtra("bundle",bundle);
                 startActivity(intent);
                 break;
             default:
