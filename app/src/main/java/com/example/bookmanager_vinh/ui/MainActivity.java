@@ -10,16 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookmanager_vinh.R;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView imgNguoiDung, imgTheLoai,imgHoaDon,imgSach;
+    ImageView imgNguoiDung, imgTheLoai, imgHoaDon, imgSach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imgNguoiDung = findViewById(R.id.imgNguoiDung);
-        imgTheLoai=findViewById(R.id.imgTheLoai);
-        imgHoaDon=findViewById(R.id.imgHoaDon);
-        imgSach=findViewById(R.id.imgSach);
+        imgTheLoai = findViewById(R.id.imgTheLoai);
+        imgHoaDon = findViewById(R.id.imgHoaDon);
+        imgSach = findViewById(R.id.imgSach);
         imgNguoiDung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

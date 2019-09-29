@@ -58,9 +58,16 @@ public class NguoiDungDAO {
         }
         return list;
     }
-    public int xoaNguoiDung(String tenNguoiDung){
-        return db.delete(TABLE_NAME,"username=?",new String[]{tenNguoiDung});
+
+    public int xoaNguoiDung(String tenNguoiDung) {
+        return db.delete(TABLE_NAME, "username=?", new String[]{tenNguoiDung});
     }
+
+//    public int updateNguoiDung(String username) {
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("username",);
+//        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{username});
+//    }
 
 
 }

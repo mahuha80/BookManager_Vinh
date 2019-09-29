@@ -20,7 +20,6 @@ import com.example.bookmanager_vinh.dao.NguoiDungDAO;
 import com.example.bookmanager_vinh.model.NguoiDung;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class NguoiDungActivity extends AppCompatActivity {
@@ -47,9 +46,9 @@ public class NguoiDungActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 itemSelected = listNguoiDung.get(i).getUsername();
-                position=i;
-                Log.e("ERROR1",itemSelected+"");
-                Log.e("ERROR1",position+"");
+                position = i;
+                Log.e("ERROR1", itemSelected + "");
+                Log.e("ERROR1", position + "");
 
             }
         });
@@ -89,18 +88,21 @@ public class NguoiDungActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.xoa:
-                int result=nguoiDungDAO.xoaNguoiDung(itemSelected);
-                if(result>0){
+                int result = nguoiDungDAO.xoaNguoiDung(itemSelected);
+                if (result > 0) {
                     Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     listNguoiDung.remove(position);
                     onResume();
 
-                }else{
+                } else {
                     Toast.makeText(this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.sua:
                 Toast.makeText(this, "Sua", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(NguoiDungActivity.this,DoiMatKhauActivity.class);
+                intent.putExtra("tenNguoiDung",itemSelected);
+                startActivity(intent);
                 break;
             default:
                 break;

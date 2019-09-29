@@ -52,9 +52,11 @@ public class DanhSachNguoiDungAdapter extends BaseAdapter {
         }
         nguoiDungHolder.tvSoDienThoai.setText(listNguoiDung.get(i).getPhone());
         nguoiDungHolder.tvTen.setText(listNguoiDung.get(i).getUsername());
-        Animation animation=AnimationUtils.loadAnimation(context,R.anim.animation_listview);
-        view.setAnimation(animation);
-        view.startAnimation(animation);
+        if(listNguoiDung.size()>8){
+            Animation animation=AnimationUtils.loadAnimation(context,R.anim.animation_listview);
+            view.setAnimation(animation);
+            view.startAnimation(animation);
+        }
 
         return view;
     }
