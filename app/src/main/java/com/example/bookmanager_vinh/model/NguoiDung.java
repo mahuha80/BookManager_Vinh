@@ -15,6 +15,11 @@ public class NguoiDung implements Serializable{
         this.fullname = fullname;
     }
 
+    public NguoiDung(String username, String pass) {
+        this.username = username;
+        this.pass = pass;
+    }
+
     public NguoiDung() {
         this.username = "no name";
         this.pass = "123456";

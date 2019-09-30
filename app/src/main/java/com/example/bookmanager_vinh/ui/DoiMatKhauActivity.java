@@ -25,6 +25,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
     NguoiDungDAO nguoiDungDAO;
     List<NguoiDung> nguoiDungList;
     List<String> listTenNguoiDung;
+    NguoiDung nguoiDung=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,10 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         init();
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        final NguoiDung nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
-        edTenDangNhap.setText(nguoiDung.getUsername());
+        if(bundle!=null){
+            final NguoiDung nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
+            edTenDangNhap.setText(nguoiDung.getUsername());
+        }
 
 
         nguoiDungList = nguoiDungDAO.getAllNguoiDung();

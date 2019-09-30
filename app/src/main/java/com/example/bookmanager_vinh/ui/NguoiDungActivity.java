@@ -28,31 +28,34 @@ public class NguoiDungActivity extends AppCompatActivity {
     List<NguoiDung> listNguoiDung;
     DanhSachNguoiDungAdapter danhSachNguoiDungAdapter;
     int position;
-    NguoiDung nguoiDungSelect=null;
+    NguoiDung nguoiDungSelect = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        lvNguoiDung = findViewById(R.id.lvNguoiDung);
-        nguoiDungDAO = new NguoiDungDAO(NguoiDungActivity.this);
-        listNguoiDung = new ArrayList<>();
-        listNguoiDung = nguoiDungDAO.getAllNguoiDung();
-//        Collections.reverse(listNguoiDung);
+        init();
         danhSachNguoiDungAdapter = new DanhSachNguoiDungAdapter(this, listNguoiDung);
         lvNguoiDung.setAdapter(danhSachNguoiDungAdapter);
         registerForContextMenu(lvNguoiDung);
         lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                position=i;
+                position = i;
                 Log.e("ERROR1", position + "");
-                nguoiDungSelect=listNguoiDung.get(i);
-                Log.e("ERROR1",nguoiDungSelect+"");
+                nguoiDungSelect = listNguoiDung.get(i);
+                Log.e("ERROR1", nguoiDungSelect + "");
 
             }
         });
 
+    }
+
+    private void init() {
+        lvNguoiDung = findViewById(R.id.lvNguoiDung);
+        nguoiDungDAO = new NguoiDungDAO(NguoiDungActivity.this);
+        listNguoiDung = new ArrayList<>();
+        listNguoiDung = nguoiDungDAO.getAllNguoiDung();
     }
 
     @Override
@@ -100,10 +103,10 @@ public class NguoiDungActivity extends AppCompatActivity {
                 break;
             case R.id.sua:
                 Toast.makeText(this, "Sua", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(NguoiDungActivity.this,DoiMatKhauActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("NguoiDung",nguoiDungSelect);
-                intent.putExtra("bundle",bundle);
+                Intent intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("NguoiDung", nguoiDungSelect);
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
                 break;
             default:
