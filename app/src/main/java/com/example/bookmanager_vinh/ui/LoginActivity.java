@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isLogin(nguoiDungDAO.isLogin(new NguoiDung(edUser.getText().toString(),edPass.getText().toString())));
+                isLogin(nguoiDungDAO.isLogin(new NguoiDung(edUser.getText().toString(), edPass.getText().toString())));
             }
         });
     }

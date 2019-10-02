@@ -25,7 +25,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
     NguoiDungDAO nguoiDungDAO;
     List<NguoiDung> nguoiDungList;
     List<String> listTenNguoiDung;
-    NguoiDung nguoiDung=null;
+    NguoiDung nguoiDung = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         init();
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        if(bundle!=null){
+        if (bundle != null) {
             final NguoiDung nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
             edTenDangNhap.setText(nguoiDung.getUsername());
         }
@@ -50,19 +50,21 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!edTenDangNhap.getText().toString().equals(nguoiDung.getUsername())) {
-                    Toast.makeText(DoiMatKhauActivity.this, "Vui lòng không thay đổi tên đăng nhập !", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (!edMatKhau.getText().toString().equals(edNhacLaiMatKhau.getText().toString())) {
+                if (nguoiDung != null) {
+                    if (!edTenDangNhap.getText().toString().equals(nguoiDung.getUsername())) {
+                        Toast.makeText(DoiMatKhauActivity.this, "Vui lòng không thay đổi tên đăng nhập !", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                if (!edMatKhau.getText().toString().equals(edNhacLaiMatKhau.getText().toString())) {
                     Toast.makeText(DoiMatKhauActivity.this, "Vui lòng nhập mật khẩu trùng nhau !", Toast.LENGTH_SHORT).show();
                     return;
-
                 } else {
-                    String matKhau = edMatKhau.getText().toString();
-                    NguoiDung nguoiDung1=new NguoiDung(nguoiDung.getUsername(),matKhau,nguoiDung.getPhone(),nguoiDung.getFullname());
-                    if(nguoiDungDAO.updateNguoiDung(nguoiDung1)>0){
+                    if ((nguoiDungDAO.isChangePassword(new NguoiDung(edTenDangNhap.getText().toString(), edMatKhau.getText().toString())))) {
+
                         Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu thành công !", Toast.LENGTH_SHORT).show();
-                    }else{
+                        finish();
+                    } else {
                         Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu không thành công !", Toast.LENGTH_SHORT).show();
 
                     }

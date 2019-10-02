@@ -64,27 +64,37 @@ public class NguoiDungDAO {
         return db.delete(TABLE_NAME, "username=?", new String[]{tenNguoiDung});
     }
 
-    public int updateNguoiDung(NguoiDung nd) {
-        if (nd.getUsername().equals("admin")) return -1;
+//    public int updateNguoiDung(NguoiDung nd) {
+//        if (nd.getUsername().equals("admin")) return -1;
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("username", nd.getUsername());
+//        contentValues.put("password", nd.getPass());
+//        contentValues.put("phone", nd.getPhone());
+//        contentValues.put("hoten", nd.getFullname());
+//        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{nd.getUsername()});
+//    }
+
+    public boolean isChangePassword(NguoiDung nguoiDung) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("username", nd.getUsername());
-        contentValues.put("password", nd.getPass());
-        contentValues.put("phone", nd.getPhone());
-        contentValues.put("hoten", nd.getFullname());
-        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{nd.getUsername()});
+        contentValues.put("username", nguoiDung.getUsername());
+        contentValues.put("password", nguoiDung.getPass());
+//        contentValues.put("phone",nguoiDung.getPhone());
+//        contentValues.put("hoten",nguoiDung.getFullname());
+        int result = db.update(TABLE_NAME, contentValues, "username=?", new String[]{nguoiDung.getUsername()});
+        return result != -1;
     }
-    public boolean isLogin(NguoiDung nd){
-        String SQL="SELECT username, password from NguoiDung where username=? and password=?";
-        Cursor cursor=db.rawQuery(SQL,new String[]{nd.getUsername(),nd.getPass()});
-        if(cursor.moveToFirst()){
+
+    public boolean isLogin(NguoiDung nd) {
+        String SQL = "SELECT username, password from NguoiDung where username=? and password=?";
+        Cursor cursor = db.rawQuery(SQL, new String[]{nd.getUsername(), nd.getPass()});
+        if (cursor.moveToFirst()) {
             return true;
         }
-        Log.e("ERROR1",cursor.toString()+"");
+        Log.e("ERROR1", cursor.toString() + "");
 
 
         return false;
     }
-
 
 
 }
