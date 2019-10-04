@@ -21,12 +21,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textSize="23sp"/>
+                android:textSize="23sp"
+                android:id="@+id/tvSTT"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:id="@+id/tvTenLoaiSach"/>
         </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"

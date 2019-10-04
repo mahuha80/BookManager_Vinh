@@ -4,11 +4,13 @@ public class LoaiSach {
     private String maTheLoai;
     private String tenTheLoai;
     private String moTa;
+    private int vitri;
 
-    public LoaiSach(String maTheLoai, String tenTheLoai, String moTa) {
+    public LoaiSach(String maTheLoai, String tenTheLoai, String moTa, int vitri) {
         this.maTheLoai = maTheLoai;
         this.tenTheLoai = tenTheLoai;
         this.moTa = moTa;
+        this.vitri = vitri;
     }
 
     public LoaiSach() {
@@ -36,5 +38,13 @@ public class LoaiSach {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    public int getVitri() {
+        return vitri;
+    }
+
+    public void setVitri(int vitri) {
+        this.vitri = vitri;
     }
 }

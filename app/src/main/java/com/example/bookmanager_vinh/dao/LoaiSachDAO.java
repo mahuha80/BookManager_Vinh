@@ -16,4 +16,5 @@ public class LoaiSachDAO {
         dbHelper=new DatabaseHelper(context);
         db=dbHelper.getWritableDatabase();
     }
+
 }
