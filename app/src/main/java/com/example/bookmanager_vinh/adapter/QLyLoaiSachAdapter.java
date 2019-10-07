@@ -56,6 +56,15 @@ public class QLyLoaiSachAdapter extends BaseAdapter {
         return view;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+    public void dataSetChange(List<LoaiSach> loaiSach){
+        this.listLoaiSach=loaiSach;
+        notifyDataSetChanged();
+    }
+
     private class LoaiSachHolder {
         TextView tvTenSach,tvSoLuong;
         ImageView imgDel;

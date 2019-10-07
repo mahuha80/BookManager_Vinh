@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:title="THÊM" android:id="@+id/add_option" />
-    <item android:title="ĐỔI MẬT KHẨU" android:id="@+id/changePass_option"/>
-    <item android:title="ĐĂNG XUẤT" android:id="@+id/logOut_option"/>
-</menu>

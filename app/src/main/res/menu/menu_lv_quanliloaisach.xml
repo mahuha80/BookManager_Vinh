@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Xóa" android:id="@+id/xoa_loaisach"></item>
+    <item android:title="Sửa" android:id="@+id/sua_loaisach"></item>
+
+</menu>

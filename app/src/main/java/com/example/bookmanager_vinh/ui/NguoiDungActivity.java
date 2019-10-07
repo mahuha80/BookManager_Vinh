@@ -1,6 +1,7 @@
 package com.example.bookmanager_vinh.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
@@ -34,6 +36,7 @@ public class NguoiDungActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        iconBack();
         init();
         danhSachNguoiDungAdapter = new DanhSachNguoiDungAdapter(this, listNguoiDung);
         lvNguoiDung.setAdapter(danhSachNguoiDungAdapter);
@@ -51,6 +54,14 @@ public class NguoiDungActivity extends AppCompatActivity {
 
     }
 
+    private void iconBack() {
+        ActionBar actionBar=getSupportActionBar();
+        Drawable drawable=getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(drawable);
+
+    }
+
     private void init() {
         lvNguoiDung = findViewById(R.id.lvNguoiDung);
         nguoiDungDAO = new NguoiDungDAO(NguoiDungActivity.this);
@@ -60,7 +71,7 @@ public class NguoiDungActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_option, menu);
+        getMenuInflater().inflate(R.menu.menu_nguoidung, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -68,13 +79,16 @@ public class NguoiDungActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.add_option:
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.add_nguoidung:
                 startActivity(new Intent(NguoiDungActivity.this, ThemNguoiDungActivity.class));
                 break;
-            case R.id.changePass_option:
+            case R.id.changepass_nguoidung:
                 startActivity(new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class));
                 break;
-            case R.id.logOut_option:
+            case R.id.logout_nguoidung:
                 startActivity(new Intent(NguoiDungActivity.this, LoginActivity.class));
                 break;
         }
@@ -84,13 +98,13 @@ public class NguoiDungActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.menu_register, menu);
+        getMenuInflater().inflate(R.menu.menu_lv_context_nguoidung, menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.xoa:
+            case R.id.xoa_nguoidung:
                 int result = nguoiDungDAO.xoaNguoiDung(nguoiDungSelect.getUsername());
                 if (result > 0) {
                     Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
@@ -101,7 +115,7 @@ public class NguoiDungActivity extends AppCompatActivity {
                     Toast.makeText(this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.sua:
+            case R.id.sua_nguoidung:
                 Toast.makeText(this, "Sua", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
                 Bundle bundle = new Bundle();
