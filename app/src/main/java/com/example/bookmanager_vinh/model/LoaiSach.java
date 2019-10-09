@@ -1,5 +1,7 @@
 package com.example.bookmanager_vinh.model;
 
+import androidx.annotation.NonNull;
+
 public class LoaiSach {
     private String maTheLoai;
     private String tenTheLoai;
@@ -46,5 +48,11 @@ public class LoaiSach {
 
     public void setVitri(int vitri) {
         this.vitri = vitri;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return tenTheLoai;
     }
 }

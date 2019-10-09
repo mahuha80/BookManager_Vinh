@@ -42,21 +42,32 @@ public class QLySachAdapter extends BaseAdapter {
         SachHolder sachHolder = null;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
-            sachHolder=new SachHolder();
-            sachHolder.tvTenSach=view.findViewById(R.id.tvSTT);
-            sachHolder.tvSoLuong=view.findViewById(R.id.tvNgayThangNam);
-            sachHolder.imgDel=view.findViewById(R.id.imgXoa);
+            sachHolder = new SachHolder();
+            sachHolder.tvTenSach = view.findViewById(R.id.tvSTT);
+            sachHolder.tvSoLuong = view.findViewById(R.id.tvNgayThangNam);
+            sachHolder.imgDel = view.findViewById(R.id.imgXoa);
             view.setTag(sachHolder);
-        }else{
-            sachHolder= (SachHolder) view.getTag();
+        } else {
+            sachHolder = (SachHolder) view.getTag();
         }
         sachHolder.tvTenSach.setText(listSach.get(i).getTensach());
-        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong()+"");
+        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong() + "");
         return view;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    public void ondatasetchanged(List<Sach> listSach) {
+        this.listSach = listSach;
+        notifyDataSetChanged();
+
+    }
+
     private class SachHolder {
-        TextView tvTenSach,tvSoLuong;
+        TextView tvTenSach, tvSoLuong;
         ImageView imgDel;
     }
 }

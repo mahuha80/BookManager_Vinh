@@ -12,28 +12,35 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
-//import com.example.bookmanager_vinh.adapter.QLySachAdapter;
+import com.example.bookmanager_vinh.adapter.QLySachAdapter;
+import com.example.bookmanager_vinh.dao.SachDAO;
+import com.example.bookmanager_vinh.model.Sach;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//import com.example.bookmanager_vinh.adapter.QLySachAdapter;
+
 public class QLySachActivity extends AppCompatActivity {
-//    List<Sach> listSach;
+    List<Sach> listSach;
     ListView lvQuanLySach;
+    SachDAO sachDAO;
+    QLySachAdapter qLySachAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sach);
         iconBack();
+        listSach = new ArrayList<>();
+        sachDAO = new SachDAO(this);
         lvQuanLySach = findViewById(R.id.lv_QLySach);
-//        listSach = new ArrayList<>();
-//        for (int i = 0; i < 20; i++) {
-//            Sach sach = new Sach("vinh" + i, 10 + i);
-//            listSach.add(sach);
-//        }
-//        QLySachAdapter qLySachAdapter = new QLySachAdapter(this, listSach);
-//        lvQuanLySach.setAdapter(qLySachAdapter);
+        listSach=sachDAO.getAllSach();
+        qLySachAdapter = new QLySachAdapter(this, listSach);
+
+        lvQuanLySach.setAdapter(qLySachAdapter);
+
+
     }
 
     private void iconBack() {
@@ -43,6 +50,14 @@ public class QLySachActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(drawable);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listSach.clear();
+        listSach=sachDAO.getAllSach();
+        qLySachAdapter.ondatasetchanged(listSach);
     }
 
     @Override
