@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.ui.Sach;
+import com.example.bookmanager_vinh.model.Sach;
 
 import java.util.List;
 
@@ -50,8 +50,8 @@ public class QLySachAdapter extends BaseAdapter {
         }else{
             sachHolder= (SachHolder) view.getTag();
         }
-        sachHolder.tvTenSach.setText(listSach.get(i).getTenSach());
-        sachHolder.tvSoLuong.setText(listSach.get(i).getSoLuong()+"");
+        sachHolder.tvTenSach.setText(listSach.get(i).getTensach());
+        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong()+"");
         return view;
     }
 

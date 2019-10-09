@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.model.LoaiSach;
-import com.example.bookmanager_vinh.model.NguoiDung;
-import com.example.bookmanager_vinh.ui.Sach;
 
 import java.util.List;
 

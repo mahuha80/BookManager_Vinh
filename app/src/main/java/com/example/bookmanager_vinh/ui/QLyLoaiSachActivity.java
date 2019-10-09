@@ -3,6 +3,7 @@ package com.example.bookmanager_vinh.ui;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,13 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QLyLoaiSachActivity extends AppCompatActivity {
+    int position;
+    LoaiSach loaiSach = null;
     private ListView lvQuanLyLoaiSach;
     private List<LoaiSach> listLoaiSach;
     private QLyLoaiSachAdapter qLyLoaiSachAdapter;
     private TheLoaiDAO theLoaiDAO;
-    int position;
-    LoaiSach loaiSach=null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +47,16 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         lvQuanLyLoaiSach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                position=i;
-                loaiSach=listLoaiSach.get(i);
-
+                position = i;
+                loaiSach = listLoaiSach.get(i);
             }
         });
 
     }
 
     private void iconBack() {
-        ActionBar actionBar=getSupportActionBar();
-        Drawable drawable=getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
+        ActionBar actionBar = getSupportActionBar();
+        Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
     }
@@ -72,13 +71,13 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.xoa_loaisach:
-        if(theLoaiDAO.deleteTheLoai(loaiSach.getMaTheLoai())>0){
-            Toast.makeText(this, "Xóa thành công loại sách !", Toast.LENGTH_SHORT).show();
-            listLoaiSach.remove(position);
-            onResume();
-        }else{
-            Toast.makeText(this, "Xóa không thành công loại sách !", Toast.LENGTH_SHORT).show();
-        }
+                if (theLoaiDAO.deleteTheLoai(loaiSach.getMaTheLoai()) > 0) {
+                    Toast.makeText(this, "Xóa thành công loại sách !", Toast.LENGTH_SHORT).show();
+                    listLoaiSach.remove(position);
+                    onResume();
+                } else {
+                    Toast.makeText(this, "Xóa không thành công loại sách !", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.sua_loaisach:
                 break;
@@ -109,6 +108,12 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        qLyLoaiSachAdapter.dataSetChange(theLoaiDAO.getAllLoaiSach());
+        try {
+            listLoaiSach.clear();
+            listLoaiSach=theLoaiDAO.getAllLoaiSach();
+            qLyLoaiSachAdapter.dataSetChange(listLoaiSach);
+        } catch (Exception e) {
+            Log.e("BOOKKK", e.toString() + " ");
+        }
     }
 }

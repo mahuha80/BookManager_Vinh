@@ -12,13 +12,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.adapter.QLySachAdapter;
+//import com.example.bookmanager_vinh.adapter.QLySachAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QLySachActivity extends AppCompatActivity {
-    List<Sach> listSach;
+//    List<Sach> listSach;
     ListView lvQuanLySach;
 
     @Override
@@ -27,13 +27,13 @@ public class QLySachActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sach);
         iconBack();
         lvQuanLySach = findViewById(R.id.lv_QLySach);
-        listSach = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Sach sach = new Sach("vinh" + i, 10 + i);
-            listSach.add(sach);
-        }
-        QLySachAdapter qLySachAdapter = new QLySachAdapter(this, listSach);
-        lvQuanLySach.setAdapter(qLySachAdapter);
+//        listSach = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            Sach sach = new Sach("vinh" + i, 10 + i);
+//            listSach.add(sach);
+//        }
+//        QLySachAdapter qLySachAdapter = new QLySachAdapter(this, listSach);
+//        lvQuanLySach.setAdapter(qLySachAdapter);
     }
 
     private void iconBack() {

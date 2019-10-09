@@ -9,36 +9,36 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.ui.Sach;
+import com.example.bookmanager_vinh.model.LoaiSach;
 
 import java.util.List;
 
 public class ThemSachAdapter implements SpinnerAdapter {
     private Context context;
-    private List<Sach> listSach;
+    private List<LoaiSach> loaiSachList;
 
-    public ThemSachAdapter(Context context, List<Sach> listSach) {
+    public ThemSachAdapter(Context context, List<LoaiSach> listSach) {
         this.context = context;
-        this.listSach = listSach;
+        this.loaiSachList = listSach;
     }
 
     @Override
     public View getDropDownView(int i, View view, ViewGroup viewGroup) {
         view= LayoutInflater.from(context).inflate(R.layout.sp_themsach,viewGroup,false);
         TextView textView=view.findViewById(R.id.tvItem);
-        textView.setText(listSach.get(i).getSoLuong()+" | "+listSach.get(i).getTenSach());
+        textView.setText(loaiSachList.get(i).getTenTheLoai()+" | "+ loaiSachList.get(i).getVitri());
         textView.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
         return view;
     }
 
     @Override
     public int getCount() {
-        return listSach.size();
+        return loaiSachList.size();
     }
 
     @Override
-    public Sach getItem(int i) {
-        return listSach.get(i);
+    public LoaiSach getItem(int i) {
+        return loaiSachList.get(i);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ThemSachAdapter implements SpinnerAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view= LayoutInflater.from(context).inflate(R.layout.sp_themsach,viewGroup,false);
         TextView textView=view.findViewById(R.id.tvItem);
-        textView.setText(listSach.get(i).getSoLuong()+" | "+listSach.get(i).getTenSach());
+        textView.setText(loaiSachList.get(i).getTenTheLoai()+" | "+ loaiSachList.get(i).getVitri());
         return view;
     }
 
