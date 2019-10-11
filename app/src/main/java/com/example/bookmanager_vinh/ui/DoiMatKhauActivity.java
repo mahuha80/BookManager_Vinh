@@ -33,10 +33,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doi_mat_khau);
         init();
         Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra("bundle");
+        final Bundle bundle = intent.getBundleExtra("bundle");
         if (bundle != null) {
-            final NguoiDung nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
+            nguoiDung = (NguoiDung) bundle.getSerializable("NguoiDung");
             edTenDangNhap.setText(nguoiDung.getUsername());
+            edTenDangNhap.setEnabled(false);
         }
 
 
@@ -50,18 +51,16 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (nguoiDung != null) {
-                    if (!edTenDangNhap.getText().toString().equals(nguoiDung.getUsername())) {
-                        Toast.makeText(DoiMatKhauActivity.this, "Vui lòng không thay đổi tên đăng nhập !", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-                if (!edMatKhau.getText().toString().equals(edNhacLaiMatKhau.getText().toString())) {
+
+                if (edMatKhau.getText().toString().equals("") || edNhacLaiMatKhau.getText().toString().equals("")) {
+                    Toast.makeText(DoiMatKhauActivity.this, "Vui lòng không để trống !", Toast.LENGTH_SHORT).show();
+                    return;
+
+                } else if (!edMatKhau.getText().toString().equals(edNhacLaiMatKhau.getText().toString())) {
                     Toast.makeText(DoiMatKhauActivity.this, "Vui lòng nhập mật khẩu trùng nhau !", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     if ((nguoiDungDAO.isChangePassword(new NguoiDung(edTenDangNhap.getText().toString(), edMatKhau.getText().toString())))) {
-
                         Toast.makeText(DoiMatKhauActivity.this, "Đổi mật khẩu thành công !", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

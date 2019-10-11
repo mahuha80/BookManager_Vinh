@@ -42,7 +42,8 @@
             android:layout_marginRight="0dp"
             android:src="@drawable/ic_close"
             android:paddingTop="1dp"
-            android:paddingBottom="1dp"/>
+            android:paddingBottom="1dp"
+            android:id="@+id/imgXoaND"/>
     </RelativeLayout>
 
 </LinearLayout>

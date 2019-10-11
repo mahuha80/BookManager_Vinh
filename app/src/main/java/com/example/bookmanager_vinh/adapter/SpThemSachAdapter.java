@@ -14,12 +14,12 @@ import com.example.bookmanager_vinh.model.LoaiSach;
 
 import java.util.List;
 
-public class ThemSachAdapter implements SpinnerAdapter {
+public class SpThemSachAdapter implements SpinnerAdapter {
     private Context context;
     private List<LoaiSach> loaiSachList;
 
 
-    public ThemSachAdapter(Context context, List<LoaiSach> listSach) {
+    public SpThemSachAdapter(Context context, List<LoaiSach> listSach) {
         this.context = context;
         this.loaiSachList = listSach;
     }
@@ -28,7 +28,7 @@ public class ThemSachAdapter implements SpinnerAdapter {
     public View getDropDownView(int i, View view, ViewGroup viewGroup) {
         view= LayoutInflater.from(context).inflate(R.layout.sp_themsach,viewGroup,false);
         TextView textView=view.findViewById(R.id.tvItem);
-        textView.setText(loaiSachList.get(i).getTenTheLoai()+" | "+ loaiSachList.get(i).getVitri());
+        textView.setText(loaiSachList.get(i).getMaTheLoai()+" | "+ loaiSachList.get(i).getTenTheLoai());
         textView.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
         return view;
     }
@@ -57,7 +57,7 @@ public class ThemSachAdapter implements SpinnerAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view= LayoutInflater.from(context).inflate(R.layout.sp_themsach,viewGroup,false);
         TextView textView=view.findViewById(R.id.tvItem);
-        textView.setText(loaiSachList.get(i).getTenTheLoai()+" | "+ loaiSachList.get(i).getVitri());
+        textView.setText(loaiSachList.get(i).getMaTheLoai()+" | "+ loaiSachList.get(i).getTenTheLoai());
         return view;
     }
 

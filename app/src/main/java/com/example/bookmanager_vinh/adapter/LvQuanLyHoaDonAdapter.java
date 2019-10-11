@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import com.example.bookmanager_vinh.R;
 
-public class QuanLyHoaDonAdapter extends BaseAdapter {
+public class LvQuanLyHoaDonAdapter extends BaseAdapter {
     private Context context;
 
-    public QuanLyHoaDonAdapter(Context context) {
+    public LvQuanLyHoaDonAdapter(Context context) {
         this.context = context;
     }
 
@@ -35,7 +35,7 @@ public class QuanLyHoaDonAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         QLyHoaDonHolder qLyHoaDonHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.lv_hoadon, viewGroup, false);
             qLyHoaDonHolder = new QLyHoaDonHolder();
             qLyHoaDonHolder.tvSTT = view.findViewById(R.id.tvNgayThangNam);
             qLyHoaDonHolder.tvNgayThangNam = view.findViewById(R.id.tvSTT);

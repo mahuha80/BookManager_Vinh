@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.adapter.ThemSachAdapter;
+import com.example.bookmanager_vinh.adapter.SpThemSachAdapter;
 import com.example.bookmanager_vinh.dao.SachDAO;
 import com.example.bookmanager_vinh.dao.TheLoaiDAO;
 import com.example.bookmanager_vinh.model.LoaiSach;
@@ -21,7 +21,7 @@ import com.example.bookmanager_vinh.model.Sach;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.example.bookmanager_vinh.adapter.ThemSachAdapter;
+//import com.example.bookmanager_vinh.adapter.SpThemSachAdapter;
 
 public class ThemSachActivity extends AppCompatActivity {
     Spinner spinner;
@@ -38,8 +38,8 @@ public class ThemSachActivity extends AppCompatActivity {
         setContentView(R.layout.activity_them_sach);
         init();
         listTheLoaiSach = theLoaiDAO.getAllLoaiSach();
-        ThemSachAdapter themSachAdapter = new ThemSachAdapter(this, listTheLoaiSach);
-        spinner.setAdapter(themSachAdapter);
+        SpThemSachAdapter SPThemSachAdapter = new SpThemSachAdapter(this, listTheLoaiSach);
+        spinner.setAdapter(SPThemSachAdapter);
         btnThemSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +73,7 @@ public class ThemSachActivity extends AppCompatActivity {
     }
 
     private void init() {
-        spinner = findViewById(R.id.spTheLoaiSach);
+        spinner = findViewById(R.id.spTheLoaiSach_themsach);
         theLoaiDAO = new TheLoaiDAO(this);
         listTheLoaiSach = new ArrayList<>();
         btnThemSach = findViewById(R.id.btnSuaSach);

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.adapter.QuanLyHoaDonAdapter;
+import com.example.bookmanager_vinh.adapter.LvQuanLyHoaDonAdapter;
 
 public class QLyHoaDonActivity extends AppCompatActivity {
     ListView lvHoaDon;
@@ -21,7 +21,7 @@ public class QLyHoaDonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hoa_don);
         iconBack();
         lvHoaDon=findViewById(R.id.lvHoaDon);
-        lvHoaDon.setAdapter(new QuanLyHoaDonAdapter(this));
+        lvHoaDon.setAdapter(new LvQuanLyHoaDonAdapter(this));
     }
 
     private void iconBack() {

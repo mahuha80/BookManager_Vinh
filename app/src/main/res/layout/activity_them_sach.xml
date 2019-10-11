@@ -19,7 +19,7 @@
         android:weightSum="10">
 
         <Spinner
-            android:id="@+id/spTheLoaiSach"
+            android:id="@+id/spTheLoaiSach_themsach"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9" />

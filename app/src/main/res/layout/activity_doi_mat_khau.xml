@@ -19,7 +19,8 @@
         android:id="@+id/edTenDangNhap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên đăng nhập"/>
+        android:clickable="false"
+        android:hint="Tên đăng nhập" />
 
     <EditText
         android:id="@+id/edMatKhau"

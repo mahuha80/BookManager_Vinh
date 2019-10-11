@@ -1,5 +1,7 @@
 package com.example.bookmanager_vinh.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Sach implements Serializable {
@@ -78,5 +80,11 @@ public class Sach implements Serializable {
 
     public void setSoluong(String soluong) {
         this.soluong = soluong;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return matheloai;
     }
 }

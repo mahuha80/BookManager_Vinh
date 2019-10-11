@@ -4,20 +4,16 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.adapter.QLyLoaiSachAdapter;
+import com.example.bookmanager_vinh.adapter.LvQLyLoaiSachAdapter;
 import com.example.bookmanager_vinh.dao.TheLoaiDAO;
 import com.example.bookmanager_vinh.model.LoaiSach;
 
@@ -25,11 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QLyLoaiSachActivity extends AppCompatActivity {
-    int position;
-    LoaiSach loaiSach = null;
     private ListView lvQuanLyLoaiSach;
     private List<LoaiSach> listLoaiSach;
-    private QLyLoaiSachAdapter qLyLoaiSachAdapter;
+    private LvQLyLoaiSachAdapter LVQLyLoaiSachAdapter;
     private TheLoaiDAO theLoaiDAO;
 
     @Override
@@ -41,16 +35,8 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         lvQuanLyLoaiSach = findViewById(R.id.lvQLyLoaiSach);
         listLoaiSach = new ArrayList<>();
         listLoaiSach = theLoaiDAO.getAllLoaiSach();
-        qLyLoaiSachAdapter = new QLyLoaiSachAdapter(this, listLoaiSach);
-        lvQuanLyLoaiSach.setAdapter(qLyLoaiSachAdapter);
-        registerForContextMenu(lvQuanLyLoaiSach);
-        lvQuanLyLoaiSach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                position = i;
-                loaiSach = listLoaiSach.get(i);
-            }
-        });
+        LVQLyLoaiSachAdapter = new LvQLyLoaiSachAdapter(this, listLoaiSach);
+        lvQuanLyLoaiSach.setAdapter(LVQLyLoaiSachAdapter);
 
     }
 
@@ -59,30 +45,6 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.menu_lv_quanliloaisach, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.xoa_loaisach:
-                if (theLoaiDAO.deleteTheLoai(loaiSach.getMaTheLoai()) > 0) {
-                    Toast.makeText(this, "Xóa thành công loại sách !", Toast.LENGTH_SHORT).show();
-                    listLoaiSach.remove(position);
-                    onResume();
-                } else {
-                    Toast.makeText(this, "Xóa không thành công loại sách !", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.sua_loaisach:
-                break;
-        }
-        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -110,8 +72,8 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         super.onResume();
         try {
             listLoaiSach.clear();
-            listLoaiSach=theLoaiDAO.getAllLoaiSach();
-            qLyLoaiSachAdapter.dataSetChange(listLoaiSach);
+            listLoaiSach = theLoaiDAO.getAllLoaiSach();
+            LVQLyLoaiSachAdapter.dataSetChange(listLoaiSach);
         } catch (Exception e) {
             Log.e("BOOKKK", e.toString() + " ");
         }
