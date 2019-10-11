@@ -82,6 +82,11 @@ public class QLySachActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.sua_sach:
+                intent=new Intent(this,SuaSachActivity.class);
+                bundle=new Bundle();
+                bundle.putSerializable("Sach",sach);
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
               break;
         }
         return super.onContextItemSelected(item);

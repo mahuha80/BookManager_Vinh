@@ -76,7 +76,7 @@ public class ThemSachActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spTheLoaiSach);
         theLoaiDAO = new TheLoaiDAO(this);
         listTheLoaiSach = new ArrayList<>();
-        btnThemSach = findViewById(R.id.btnThemSach);
+        btnThemSach = findViewById(R.id.btnSuaSach);
         edMaSach = findViewById(R.id.edMaSach);
         edTenSach = findViewById(R.id.edTacGia);
         edNXB = findViewById(R.id.edGia);

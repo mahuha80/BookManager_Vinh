@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ThemSachActivity"
+    tools:context=".ui.SuaSachActivity"
     android:orientation="vertical"
     android:layout_margin="16dp">
     <EditText
@@ -65,15 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="THÊM"
-            />
+            android:text="Sửa" />
 
         <Button
             android:id="@+id/btnHuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="finishActivity"
             android:text="HỦY" />
     </LinearLayout>
 
@@ -87,7 +85,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="finishActivity"
             android:text="SHOW" />
     </LinearLayout>
 
