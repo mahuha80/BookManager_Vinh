@@ -41,16 +41,16 @@ public class QLyLoaiSachAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         QLyLoaiSachAdapter.LoaiSachHolder loaiSachHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.lv_quanlytheloaisach, viewGroup, false);
             loaiSachHolder=new QLyLoaiSachAdapter.LoaiSachHolder();
-            loaiSachHolder.tvTenSach=view.findViewById(R.id.tvSTT);
-            loaiSachHolder.tvSoLuong=view.findViewById(R.id.tvNgayThangNam);
+            loaiSachHolder.tvMaTheLoai=view.findViewById(R.id.tvMaTheLoai);
+            loaiSachHolder.tvTenTheLoai=view.findViewById(R.id.tvTenTheLoai);
             view.setTag(loaiSachHolder);
         }else{
             loaiSachHolder= (QLyLoaiSachAdapter.LoaiSachHolder) view.getTag();
         }
-        loaiSachHolder.tvTenSach.setText(listLoaiSach.get(i).getTenTheLoai());
-        loaiSachHolder.tvSoLuong.setText(listLoaiSach.get(i).getVitri()+"");
+        loaiSachHolder.tvMaTheLoai.setText(listLoaiSach.get(i).getTenTheLoai());
+        loaiSachHolder.tvTenTheLoai.setText(listLoaiSach.get(i).getMaTheLoai()+"");
         return view;
     }
 
@@ -64,7 +64,7 @@ public class QLyLoaiSachAdapter extends BaseAdapter {
     }
 
     private class LoaiSachHolder {
-        TextView tvTenSach,tvSoLuong;
+        TextView tvMaTheLoai,tvTenTheLoai;
         ImageView imgDel;
     }
 }

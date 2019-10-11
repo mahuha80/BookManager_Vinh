@@ -1,6 +1,8 @@
 package com.example.bookmanager_vinh.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class ThemSachActivity extends AppCompatActivity {
     TheLoaiDAO theLoaiDAO;
     SachDAO sachDAO;
     List<LoaiSach> listTheLoaiSach;
+    Intent intent;
     private Button btnThemSach;
     private EditText edMaSach, edTenSach, edTacGia, edNXB, edGia, edSoLuong;
 
@@ -63,7 +66,9 @@ public class ThemSachActivity extends AppCompatActivity {
         String nxv = edNXB.getText().toString();
         String gia = edGia.getText().toString();
         String soLuong = edSoLuong.getText().toString();
+        Log.e("BUGG", loaiSach.getMaTheLoai() + "");
         long result = sachDAO.insertSach(new Sach(maSach, loaiSach.getMaTheLoai(), tenSach, tacGia, nxv, gia, soLuong));
+
         return result > 0;
     }
 

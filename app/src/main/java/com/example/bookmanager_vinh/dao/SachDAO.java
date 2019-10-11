@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.bookmanager_vinh.database.DatabaseHelper;
 import com.example.bookmanager_vinh.model.Sach;
@@ -57,14 +59,17 @@ public class SachDAO {
         Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String maSach = cursor.getColumnName(cursor.getColumnIndex("masach"));
-            String matheloai = cursor.getColumnName(cursor.getColumnIndex("matheloai"));
-            String tensach = cursor.getColumnName(cursor.getColumnIndex("tensach"));
-            String tacgia = cursor.getColumnName(cursor.getColumnIndex("tacgia"));
-            String nxb = cursor.getColumnName(cursor.getColumnIndex("nxb"));
-            String giabia = cursor.getColumnName(cursor.getColumnIndex("giabia"));
-            String soluong = cursor.getColumnName(cursor.getColumnIndex("soluong"));
+            String maSach = cursor.getString(cursor.getColumnIndex("masach"));
+            String matheloai = cursor.getString(cursor.getColumnIndex("matheloai"));
+            String tensach = cursor.getString(cursor.getColumnIndex("tensach"));
+            String tacgia = cursor.getString(cursor.getColumnIndex("tacgia"));
+            String nxb = cursor.getString(cursor.getColumnIndex("nxb"));
+            String giabia = cursor.getString(cursor.getColumnIndex("giabia"));
+            String soluong = cursor.getString(cursor.getColumnIndex("soluong"));
             listSach.add(new Sach(maSach, matheloai, tensach, tacgia, nxb, giabia, soluong));
+            for(Sach sach:listSach){
+                Log.e("BUGG",sach.getMasach());
+            }
             cursor.moveToNext();
 
         }

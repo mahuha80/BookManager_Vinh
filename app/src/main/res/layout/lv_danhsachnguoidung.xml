@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="60dp">
 
         <ImageView
             android:id="@+id/imgSach"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:paddingTop="8dp"
@@ -35,12 +36,13 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="0dp"
-            android:paddingTop="8dp"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_close"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.bookmanager_vinh.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +44,15 @@ public class QLySachAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
             sachHolder = new SachHolder();
-            sachHolder.tvTenSach = view.findViewById(R.id.tvSTT);
-            sachHolder.tvSoLuong = view.findViewById(R.id.tvNgayThangNam);
-            sachHolder.imgDel = view.findViewById(R.id.imgXoa);
+            sachHolder.tvTenSach = view.findViewById(R.id.tvTenSach);
+            sachHolder.tvSoLuong= view.findViewById(R.id.tvSoLuong);
             view.setTag(sachHolder);
         } else {
             sachHolder = (SachHolder) view.getTag();
         }
         sachHolder.tvTenSach.setText(listSach.get(i).getTensach());
-        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong() + "");
+        Log.e("DEBUG",listSach.get(i).getTensach()+"");
+        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong());
         return view;
     }
 
@@ -68,6 +69,5 @@ public class QLySachAdapter extends BaseAdapter {
 
     private class SachHolder {
         TextView tvTenSach, tvSoLuong;
-        ImageView imgDel;
     }
 }

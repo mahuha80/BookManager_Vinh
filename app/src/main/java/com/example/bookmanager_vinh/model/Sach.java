@@ -1,6 +1,8 @@
 package com.example.bookmanager_vinh.model;
 
-public class Sach {
+import java.io.Serializable;
+
+public class Sach implements Serializable {
     private String masach;
     private String matheloai;
     private String tensach;
