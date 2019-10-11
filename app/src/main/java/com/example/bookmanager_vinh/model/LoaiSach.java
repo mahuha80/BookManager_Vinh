@@ -2,7 +2,9 @@ package com.example.bookmanager_vinh.model;
 
 import androidx.annotation.NonNull;
 
-public class LoaiSach {
+import java.io.Serializable;
+
+public class LoaiSach implements Serializable {
     private String maTheLoai;
     private String tenTheLoai;
     private String moTa;

@@ -12,7 +12,7 @@ import com.example.bookmanager_vinh.dao.TheLoaiDAO;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "dbBookManager";
-    public static final int version = 3;
+    public static final int version = 4;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 2);

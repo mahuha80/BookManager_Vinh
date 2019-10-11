@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,7 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
     private List<LoaiSach> listLoaiSach;
     private LvQLyLoaiSachAdapter LVQLyLoaiSachAdapter;
     private TheLoaiDAO theLoaiDAO;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,17 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         listLoaiSach = theLoaiDAO.getAllLoaiSach();
         LVQLyLoaiSachAdapter = new LvQLyLoaiSachAdapter(this, listLoaiSach);
         lvQuanLyLoaiSach.setAdapter(LVQLyLoaiSachAdapter);
+        lvQuanLyLoaiSach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                intent=new Intent(QLyLoaiSachActivity.this,SuaTheLoaiActivity.class);
+                Bundle bundle=new Bundle();
+                LoaiSach loaiSach=listLoaiSach.get(i);
+                bundle.putSerializable("LoaiSach",loaiSach);
+                intent.putExtra("Bundle",bundle);
+                startActivity(intent);
+            }
+        });
 
     }
 

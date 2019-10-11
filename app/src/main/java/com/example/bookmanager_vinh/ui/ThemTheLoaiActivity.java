@@ -48,7 +48,7 @@ public class ThemTheLoaiActivity extends AppCompatActivity {
         edMaTheLoai=findViewById(R.id.edMaTheLoai);
         edTenTheLoai=findViewById(R.id.edTenTheLoai);
         edViTri=findViewById(R.id.edViTri);
-        btnThem=findViewById(R.id.btnThem);
+        btnThem=findViewById(R.id.btnSua);
         edMoTa=findViewById(R.id.edMoTa);
         theLoaiDAO=new TheLoaiDAO(this);
     }

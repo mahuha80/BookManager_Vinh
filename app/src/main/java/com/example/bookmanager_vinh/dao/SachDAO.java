@@ -17,7 +17,7 @@ public class SachDAO {
     public static final String TABLE_NAME = "Sach";
     public static final String SQL_SACH = "" +
             "CREATE TABLE Sach (masach text primary key,matheloai text,tensach text," +
-            " tacgia text ,nxb text ,giabia double , soluong number)";
+            " tacgia text ,nxb text ,giabia double , soluong integer)";
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 
