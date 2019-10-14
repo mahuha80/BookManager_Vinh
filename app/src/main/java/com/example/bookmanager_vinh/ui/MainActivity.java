@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         imgHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, QLyHoaDonActivity.class));
+                startActivity(new Intent(MainActivity.this, ThemHoaDonActivity.class));
 
             }
         });
