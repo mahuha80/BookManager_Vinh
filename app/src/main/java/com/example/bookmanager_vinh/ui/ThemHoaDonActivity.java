@@ -23,6 +23,8 @@ import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,9 +37,10 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     EditText edMaHD, edNgayMua, edSoLuong;
     ListView lvThemHoaDon;
     List<HoaDonChiTiet> listHoaDonChiTietDraft;
-    Button btnThemVaoGioHang,btnXemHoaDon;
+    Button btnThemVaoGioHang, btnXemHoaDon;
     LvThemHoaDonAdapter lvThemHoaDonAdapter;
     Intent intentXemHoaDon;
+    Date currentTime;
 
 
     @Override
@@ -49,40 +52,31 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         listSachSP = new ArrayList<>();
         listSachSP = sachDAO.getAllSach();
         final SpThemHoaDonAdapter spThemHoaDonAdapter = new SpThemHoaDonAdapter(this, listSachSP);
+
+
         spinner.setAdapter(spThemHoaDonAdapter);
         Sach sach = (Sach) spinner.getSelectedItem();
-        final Date date = Calendar.getInstance().getTime();
-        edNgayMua.setText(date.toString());
+//       get day month year
+
+
         lvThemHoaDonAdapter = new LvThemHoaDonAdapter(this, listHoaDonChiTietDraft);
         lvThemHoaDon.setAdapter(lvThemHoaDonAdapter);
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String maHoaDon = edMaHD.getText().toString();
-                Sach sach = (Sach) spinner.getSelectedItem();
+                if(maHoaDon.length()>0&&edSoLuong.length()>0){
+                    edMaHD.setEnabled(false);
+                }
+                Sach sach = (Sach) spinner.getSelectedItem()
                 int soLuong = Integer.parseInt(edSoLuong.getText().toString());
-                HoaDon hoaDon = new HoaDon(maHoaDon, date);
+                HoaDon hoaDon = new HoaDon(maHoaDon, null);
                 HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, soLuong);
-                Log.e("AAA", hoaDonChiTiet.getSoLuongMua() + "");
                 listHoaDonChiTietDraft.add(hoaDonChiTiet);
                 lvThemHoaDonAdapter.notifyDataSetChanged();
 
             }
         });
-        btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intentXemHoaDon=new Intent(ThemHoaDonActivity.this,XemHoaDonActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("HoaDonChiTiet",listHoaDonChiTietDraft.get(0));
-                bundle.putSerializable("HoaDonChiTiet1",listHoaDonChiTietDraft.get(0));
-                intentXemHoaDon.putExtra("Bundle",bundle);
-                startActivity(intentXemHoaDon);
-
-            }
-        });
-
-
     }
 
     private void init() {
@@ -94,7 +88,7 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         lvThemHoaDon = findViewById(R.id.lvThemHoaDon);
         listHoaDonChiTietDraft = new ArrayList<>();
         btnThemVaoGioHang = findViewById(R.id.btnThemGioHang);
-        btnXemHoaDon=findViewById(R.id.btnXemHoaDon);
+        btnXemHoaDon = findViewById(R.id.btnXemHoaDon);
     }
 
     private void iconBack() {
@@ -114,5 +108,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        currentTime=Calendar.getInstance().getTime();
+        edNgayMua.setText(currentTime.toString());
+        edNgayMua.setEnabled(false);
+
     }
 }
