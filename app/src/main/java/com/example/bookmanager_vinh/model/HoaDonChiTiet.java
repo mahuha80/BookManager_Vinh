@@ -1,6 +1,8 @@
 package com.example.bookmanager_vinh.model;
 
-public class HoaDonChiTiet {
+import java.io.Serializable;
+
+public class HoaDonChiTiet implements Serializable {
     private int maHDCT;
     private HoaDon hoaDon;
     private Sach sach;
@@ -8,6 +10,12 @@ public class HoaDonChiTiet {
 
     public HoaDonChiTiet(int maHDCT, HoaDon hoaDon, Sach sach, int soLuongMua) {
         this.maHDCT = maHDCT;
+        this.hoaDon = hoaDon;
+        this.sach = sach;
+        this.soLuongMua = soLuongMua;
+    }
+
+    public HoaDonChiTiet(HoaDon hoaDon, Sach sach, int soLuongMua) {
         this.hoaDon = hoaDon;
         this.sach = sach;
         this.soLuongMua = soLuongMua;

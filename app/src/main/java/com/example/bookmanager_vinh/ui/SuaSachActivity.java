@@ -40,13 +40,16 @@ public class SuaSachActivity extends AppCompatActivity {
         intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
         Sach sach = (Sach) bundle.getSerializable("Sach");
+
         if (sach != null) {
+            Toast.makeText(this, "Co Sach", Toast.LENGTH_SHORT).show();
+            Log.e("AAA",sach.getMasach()+"  "+sach.getTensach()+sach.getTacgia());
             edMaSach.setText(sach.getMasach());
             edTenSach.setText(sach.getTensach());
             edTacGia.setText(sach.getTacgia());
-            edNXB.setText(sach.getTensach());
-            edGia.setText(sach.getGiabia());
-            edSoLuong.setText(sach.getSoluong());
+            edNXB.setText(sach.getNxb());
+            edGia.setText(sach.getGiabia()+"");
+            edSoLuong.setText(sach.getSoluong()+"");
             spinner.setSelection(getIndexMaTheLoai(sach.getMatheloai()));
             edMaSach.setEnabled(false);
         }
@@ -64,8 +67,8 @@ public class SuaSachActivity extends AppCompatActivity {
         String tenSach = edTenSach.getText().toString();
         String tacGia = edTacGia.getText().toString();
         String nxv = edNXB.getText().toString();
-        String gia = edGia.getText().toString();
-        String soLuong = edSoLuong.getText().toString();
+        double gia = Double.parseDouble(edGia.getText().toString());
+        int soLuong = Integer.parseInt(edSoLuong.getText().toString());
         Log.e("BUGG", loaiSach.getMaTheLoai() + "");
         Log.e("BUGG",maSach+" "+tenSach);
         long result = sachDAO.updateSach(new Sach(maSach, loaiSach.getMaTheLoai(), tenSach, tacGia, nxv, gia, soLuong));

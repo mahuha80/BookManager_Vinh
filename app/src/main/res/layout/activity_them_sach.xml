@@ -44,11 +44,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/edNXB"
         android:hint="Nhà Xuất Bản"/>
+
     <EditText
+        android:id="@+id/edGia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edGia"
-        android:hint="Tác Giá"/>
+        android:hint="Gía" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

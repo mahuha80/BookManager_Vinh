@@ -63,11 +63,11 @@ public class ThemSachActivity extends AppCompatActivity {
         String maSach = edMaSach.getText().toString();
         String tenSach = edTenSach.getText().toString();
         String tacGia = edTacGia.getText().toString();
-        String nxv = edNXB.getText().toString();
-        String gia = edGia.getText().toString();
-        String soLuong = edSoLuong.getText().toString();
+        String nxb = edNXB.getText().toString();
+        double gia = Double.parseDouble(edGia.getText().toString());
+        int soLuong = Integer.parseInt(edSoLuong.getText().toString());
         Log.e("BUGG", loaiSach.getMaTheLoai() + "");
-        long result = sachDAO.insertSach(new Sach(maSach, loaiSach.getMaTheLoai(), tenSach, tacGia, nxv, gia, soLuong));
+        long result = sachDAO.insertSach(new Sach(maSach, loaiSach.getMaTheLoai(), tenSach, tacGia, nxb, gia, soLuong));
 
         return result > 0;
     }
@@ -78,8 +78,8 @@ public class ThemSachActivity extends AppCompatActivity {
         listTheLoaiSach = new ArrayList<>();
         btnThemSach = findViewById(R.id.btnSuaSach);
         edMaSach = findViewById(R.id.edMaSach);
-        edTenSach = findViewById(R.id.edTacGia);
-        edNXB = findViewById(R.id.edGia);
+        edTenSach = findViewById(R.id.edTenSach);
+        edNXB = findViewById(R.id.edNXB);
         edTacGia = findViewById(R.id.edTacGia);
         edGia = findViewById(R.id.edGia);
         edSoLuong = findViewById(R.id.edSoLuong);

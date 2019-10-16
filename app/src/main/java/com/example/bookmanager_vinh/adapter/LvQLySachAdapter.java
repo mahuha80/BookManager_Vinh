@@ -1,7 +1,6 @@
 package com.example.bookmanager_vinh.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +49,7 @@ public class LvQLySachAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
             sachHolder = new SachHolder();
             sachHolder.tvTenSach = view.findViewById(R.id.tvTenSach);
-            sachHolder.tvSoLuong= view.findViewById(R.id.tvSoLuong);
+            sachHolder.tvGiaSach= view.findViewById(R.id.tvGiaSach);
             sachHolder.imgXoa=view.findViewById(R.id.imgXoa);
             view.setTag(sachHolder);
         } else {
@@ -58,7 +57,7 @@ public class LvQLySachAdapter extends BaseAdapter {
         }
         sachHolder.tvTenSach.setText(listSach.get(i).getTensach());
         Log.e("DEBUG",listSach.get(i).getTensach()+"");
-        sachHolder.tvSoLuong.setText(listSach.get(i).getSoluong());
+        sachHolder.tvGiaSach.setText(listSach.get(i).getGiabia()+"");
         sachHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +65,7 @@ public class LvQLySachAdapter extends BaseAdapter {
                 int result = sachDAO.deleteSach(sach.getMasach());
                 if (result > 0) {
                     Toast.makeText(context, "Xoa thanh cong", Toast.LENGTH_SHORT).show();
+                    //ok
                     listSach.remove(i);
                     notifyDataSetChanged();
                 } else {
@@ -89,7 +89,7 @@ public class LvQLySachAdapter extends BaseAdapter {
     }
 
     private class SachHolder {
-        TextView tvTenSach, tvSoLuong;
+        TextView tvTenSach, tvGiaSach;
         ImageView imgXoa;
     }
 }

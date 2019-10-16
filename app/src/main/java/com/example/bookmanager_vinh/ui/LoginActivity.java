@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 isLogin(nguoiDungDAO.isLogin(new NguoiDung(edUser.getText().toString(), edPass.getText().toString())));
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
 
             }
         });

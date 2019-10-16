@@ -10,13 +10,13 @@ public class Sach implements Serializable {
     private String tensach;
     private String tacgia;
     private String nxb;
-    private String giabia;
-    private String soluong;
+    private double giabia;
+    private int soluong;
 
     public Sach() {
     }
 
-    public Sach(String masach, String matheloai, String tensach, String tacgia, String nxb, String giabia, String soluong) {
+    public Sach(String masach, String matheloai, String tensach, String tacgia, String nxb, double giabia, int soluong) {
         this.masach = masach;
         this.matheloai = matheloai;
         this.tensach = tensach;
@@ -66,19 +66,19 @@ public class Sach implements Serializable {
         this.nxb = nxb;
     }
 
-    public String getGiabia() {
+    public double getGiabia() {
         return giabia;
     }
 
-    public void setGiabia(String giabia) {
+    public void setGiabia(double giabia) {
         this.giabia = giabia;
     }
 
-    public String getSoluong() {
+    public int getSoluong() {
         return soluong;
     }
 
-    public void setSoluong(String soluong) {
+    public void setSoluong(int soluong) {
         this.soluong = soluong;
     }
 

@@ -48,7 +48,7 @@ public class QLySachActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 intent = new Intent(QLySachActivity.this, SuaSachActivity.class);
                 Bundle bundle = new Bundle();
-                Sach sach = listSach.get(i);
+                Sach sach = sachDAO.getAllSach().get(i);
                 bundle.putSerializable("Sach", sach);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);

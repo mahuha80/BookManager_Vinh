@@ -1,7 +1,6 @@
 package com.example.bookmanager_vinh.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +59,6 @@ public class LvDanhSachNguoiDungAdapter extends BaseAdapter {
         }
         nguoiDungHolder.tvSoDienThoai.setText(listNguoiDung.get(i).getPhone());
         nguoiDungHolder.tvTen.setText(listNguoiDung.get(i).getUsername());
-//        new demo
         nguoiDungHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +76,7 @@ public class LvDanhSachNguoiDungAdapter extends BaseAdapter {
             }
         });
         if(listNguoiDung.size()>8){
-            Animation animation=AnimationUtils.loadAnimation(context,R.anim.animation_listview);
+            Animation animation=AnimationUtils.loadAnimation(context, R.anim.animation_listview);
             view.setAnimation(animation);
             view.startAnimation(animation);
         }

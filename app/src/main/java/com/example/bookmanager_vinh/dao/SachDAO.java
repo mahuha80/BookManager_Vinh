@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.bookmanager_vinh.database.DatabaseHelper;
 import com.example.bookmanager_vinh.model.Sach;
@@ -64,8 +63,8 @@ public class SachDAO {
             String tensach = cursor.getString(cursor.getColumnIndex("tensach"));
             String tacgia = cursor.getString(cursor.getColumnIndex("tacgia"));
             String nxb = cursor.getString(cursor.getColumnIndex("nxb"));
-            String giabia = cursor.getString(cursor.getColumnIndex("giabia"));
-            String soluong = cursor.getString(cursor.getColumnIndex("soluong"));
+            double giabia =cursor.getDouble(cursor.getColumnIndex("giabia"));
+            int soluong = cursor.getInt(cursor.getColumnIndex("soluong"));
             listSach.add(new Sach(maSach, matheloai, tensach, tacgia, nxb, giabia, soluong));
             for(Sach sach:listSach){
                 Log.e("BUGG",sach.getMasach());
