@@ -60,6 +60,7 @@ public class LvDanhSachNguoiDungAdapter extends BaseAdapter {
         }
         nguoiDungHolder.tvSoDienThoai.setText(listNguoiDung.get(i).getPhone());
         nguoiDungHolder.tvTen.setText(listNguoiDung.get(i).getUsername());
+//        new demo
         nguoiDungHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
