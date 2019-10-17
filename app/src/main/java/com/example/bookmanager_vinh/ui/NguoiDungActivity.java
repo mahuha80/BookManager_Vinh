@@ -87,7 +87,10 @@ public class NguoiDungActivity extends AppCompatActivity {
                 startActivity(new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class));
                 break;
             case R.id.logout_nguoidung:
-                startActivity(new Intent(NguoiDungActivity.this, LoginActivity.class));
+                Intent intentLogOut=new Intent(NguoiDungActivity.this, LoginActivity.class);
+                intentLogOut.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentLogOut);
+                NguoiDungActivity.this.finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

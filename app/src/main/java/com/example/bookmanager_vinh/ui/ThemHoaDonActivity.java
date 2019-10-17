@@ -24,6 +24,8 @@ import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,9 +38,10 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     EditText edMaHD, edNgayMua, edSoLuong;
     ListView lvThemHoaDon;
     List<HoaDonChiTiet> listHoaDonChiTietDraft;
-    Button btnThemVaoGioHang,btnXemHoaDon;
+    Button btnThemVaoGioHang, btnXemHoaDon;
     LvThemHoaDonAdapter lvThemHoaDonAdapter;
     Intent intentXemHoaDon;
+    Date currentTime;
 
 
     @Override
@@ -50,10 +53,13 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         listSachSP = new ArrayList<>();
         listSachSP = sachDAO.getAllSach();
         final SpThemHoaDonAdapter spThemHoaDonAdapter = new SpThemHoaDonAdapter(this, listSachSP);
+
+
         spinner.setAdapter(spThemHoaDonAdapter);
         Sach sach = (Sach) spinner.getSelectedItem();
-        final Date date = Calendar.getInstance().getTime();
-        edNgayMua.setText(date.toString());
+//       get day month year
+
+
         lvThemHoaDonAdapter = new LvThemHoaDonAdapter(this, listHoaDonChiTietDraft);
         lvThemHoaDon.setAdapter(lvThemHoaDonAdapter);
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +73,19 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 String soLuong = edSoLuong.getText().toString();
                 HoaDon hoaDon = new HoaDon(maHoaDon, date);
                 HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
+                if(maHoaDon.length()>0&&edSoLuong.length()>0){
+                    edMaHD.setEnabled(false);
+                }
+                Sach sach = (Sach) spinner.getSelectedItem()
+                int soLuong = Integer.parseInt(edSoLuong.getText().toString());
+                HoaDon hoaDon = new HoaDon(maHoaDon, null);
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, soLuong);
                 listHoaDonChiTietDraft.add(hoaDonChiTiet);
                 lvThemHoaDonAdapter.notifyDataSetChanged();
 
             }
         });
+
         btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +120,7 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         lvThemHoaDon = findViewById(R.id.lvThemHoaDon);
         listHoaDonChiTietDraft = new ArrayList<>();
         btnThemVaoGioHang = findViewById(R.id.btnThemGioHang);
-        btnXemHoaDon=findViewById(R.id.btnXemHoaDon);
+        btnXemHoaDon = findViewById(R.id.btnXemHoaDon);
     }
 
     private void iconBack() {
@@ -126,5 +140,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        currentTime=Calendar.getInstance().getTime();
+        edNgayMua.setText(currentTime.toString());
+        edNgayMua.setEnabled(false);
+
     }
 }
