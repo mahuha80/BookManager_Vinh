@@ -9,7 +9,7 @@
     android:layout_margin="8dp">
 
     <EditText
-        android:id="@+id/edMaHD"
+        android:id="@+id/edMaHDXHD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -17,7 +17,7 @@
         android:hint="Mã HĐ" />
 
     <EditText
-        android:id="@+id/edNgayMua"
+        android:id="@+id/edNgayMuaXHD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ngày mua" />
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="Số lượng"/>
 
     <LinearLayout

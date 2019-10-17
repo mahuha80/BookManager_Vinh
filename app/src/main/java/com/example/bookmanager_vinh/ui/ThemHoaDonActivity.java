@@ -23,6 +23,7 @@ import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,12 +59,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String maHoaDon = edMaHD.getText().toString();
                 Sach sach = (Sach) spinner.getSelectedItem();
-                int soLuong = Integer.parseInt(edSoLuong.getText().toString());
+                edMaHD.setEnabled(false);
+                edNgayMua.setEnabled(false);
+                String soLuong = edSoLuong.getText().toString();
                 HoaDon hoaDon = new HoaDon(maHoaDon, date);
-                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, soLuong);
-                Log.e("AAA", hoaDonChiTiet.getSoLuongMua() + "");
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
                 listHoaDonChiTietDraft.add(hoaDonChiTiet);
                 lvThemHoaDonAdapter.notifyDataSetChanged();
 
@@ -74,8 +77,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intentXemHoaDon=new Intent(ThemHoaDonActivity.this,XemHoaDonActivity.class);
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("HoaDonChiTiet",listHoaDonChiTietDraft.get(0));
-                bundle.putSerializable("HoaDonChiTiet1",listHoaDonChiTietDraft.get(0));
+                bundle.putString("mahoadon",edMaHD.getText().toString());
+                bundle.putString("ngaymua",edNgayMua.getText().toString());
+                List<Sach> sachHoaDon=new ArrayList<>();
+                for(int i=0;i<listHoaDonChiTietDraft.size();i++){
+                    Sach sach1=listHoaDonChiTietDraft.get(i).getSach();
+                    sachHoaDon.add(sach1);
+                }
+                intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
                 intentXemHoaDon.putExtra("Bundle",bundle);
                 startActivity(intentXemHoaDon);
 
@@ -88,8 +97,8 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     private void init() {
         spinner = findViewById(R.id.spTenSach);
         sachDAO = new SachDAO(this);
-        edMaHD = findViewById(R.id.edMaHD);
-        edNgayMua = findViewById(R.id.edNgayMua);
+        edMaHD = findViewById(R.id.edMaHDXHD);
+        edNgayMua = findViewById(R.id.edNgayMuaXHD);
         edSoLuong = findViewById(R.id.edSoLuong);
         lvThemHoaDon = findViewById(R.id.lvThemHoaDon);
         listHoaDonChiTietDraft = new ArrayList<>();

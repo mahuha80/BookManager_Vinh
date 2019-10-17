@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.ThemHoaDonActivity"></activity>
+        <activity android:name=".ui.XemHoaDonActivity"></activity>
+
         <activity android:name=".ui.SuaTheLoaiActivity" />
         <activity android:name=".ui.SuaSachActivity" />
         <activity android:name=".ui.ThemTheLoaiActivity" />
