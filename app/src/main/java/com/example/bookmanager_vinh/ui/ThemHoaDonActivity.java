@@ -23,6 +23,7 @@ import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +65,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String maHoaDon = edMaHD.getText().toString();
+                Sach sach = (Sach) spinner.getSelectedItem();
+                edMaHD.setEnabled(false);
+                edNgayMua.setEnabled(false);
+                String soLuong = edSoLuong.getText().toString();
+                HoaDon hoaDon = new HoaDon(maHoaDon, date);
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
                 if(maHoaDon.length()>0&&edSoLuong.length()>0){
                     edMaHD.setEnabled(false);
                 }
@@ -77,13 +85,37 @@ public class ThemHoaDonActivity extends AppCompatActivity {
 
             }
         });
+
+        btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentXemHoaDon=new Intent(ThemHoaDonActivity.this,XemHoaDonActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("mahoadon",edMaHD.getText().toString());
+                bundle.putString("ngaymua",edNgayMua.getText().toString());
+                List<Sach> sachHoaDon=new ArrayList<>();
+                ArrayList<Integer> soLuong=new ArrayList<>();
+                for(int i=0;i<listHoaDonChiTietDraft.size();i++){
+                    Sach sach1=listHoaDonChiTietDraft.get(i).getSach();
+                    sachHoaDon.add(sach1);
+                    soLuong.add(sach1.getSoluong());
+                }
+                intentXemHoaDon.putIntegerArrayListExtra("soLuong",soLuong);
+                intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
+                intentXemHoaDon.putExtra("Bundle",bundle);
+                startActivity(intentXemHoaDon);
+
+            }
+        });
+
+
     }
 
     private void init() {
         spinner = findViewById(R.id.spTenSach);
         sachDAO = new SachDAO(this);
-        edMaHD = findViewById(R.id.edMaHD);
-        edNgayMua = findViewById(R.id.edNgayMua);
+        edMaHD = findViewById(R.id.edMaHDXHD);
+        edNgayMua = findViewById(R.id.edNgayMuaXHD);
         edSoLuong = findViewById(R.id.edSoLuong);
         lvThemHoaDon = findViewById(R.id.lvThemHoaDon);
         listHoaDonChiTietDraft = new ArrayList<>();
