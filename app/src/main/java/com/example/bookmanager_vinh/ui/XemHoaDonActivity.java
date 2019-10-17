@@ -16,6 +16,7 @@ import java.util.List;
 public class XemHoaDonActivity extends AppCompatActivity {
     EditText edMaHoaDon, edNgayMua;
     List<Sach> listSach;
+    ArrayList<Integer> soLuong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,10 @@ public class XemHoaDonActivity extends AppCompatActivity {
             edMaHoaDon.setEnabled(false);
             edNgayMua.setEnabled(false);
             listSach = (List<Sach>) intent.getSerializableExtra("list");
+            soLuong=intent.getIntegerArrayListExtra("soLuong");
+
+            Toast.makeText(this, listSach.size()+" "+soLuong.size(), Toast.LENGTH_SHORT).show();
+
 
         }
     }
@@ -40,6 +45,7 @@ public class XemHoaDonActivity extends AppCompatActivity {
         edMaHoaDon = findViewById(R.id.edMaHDXHD);
         edNgayMua = findViewById(R.id.edNgayMuaXHD);
         listSach = new ArrayList<>();
+        soLuong=new ArrayList<>();
 
     }
 }

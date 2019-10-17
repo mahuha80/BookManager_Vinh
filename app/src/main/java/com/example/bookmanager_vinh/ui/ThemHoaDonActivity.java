@@ -80,10 +80,13 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 bundle.putString("mahoadon",edMaHD.getText().toString());
                 bundle.putString("ngaymua",edNgayMua.getText().toString());
                 List<Sach> sachHoaDon=new ArrayList<>();
+                ArrayList<Integer> soLuong=new ArrayList<>();
                 for(int i=0;i<listHoaDonChiTietDraft.size();i++){
                     Sach sach1=listHoaDonChiTietDraft.get(i).getSach();
                     sachHoaDon.add(sach1);
+                    soLuong.add(sach1.getSoluong());
                 }
+                intentXemHoaDon.putIntegerArrayListExtra("soLuong",soLuong);
                 intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
                 intentXemHoaDon.putExtra("Bundle",bundle);
                 startActivity(intentXemHoaDon);
