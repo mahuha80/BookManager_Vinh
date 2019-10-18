@@ -48,12 +48,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edGia"
-        android:hint="Tác Giá"/>
+        android:hint="Giá"
+        android:inputType="number"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edSoLuong"
-        android:hint="Số lượng"/>
+        android:hint="Số lượng"
+        android:inputType="number"/>
 
     <LinearLayout
         android:layout_width="match_parent"
