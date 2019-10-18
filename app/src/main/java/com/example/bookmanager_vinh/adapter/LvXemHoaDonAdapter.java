@@ -55,12 +55,12 @@ public class LvXemHoaDonAdapter extends BaseAdapter {
         } else {
             xemHoaDonHolder = (XemHoaDonHolder) convertView.getTag();
         }
-        xemHoaDonHolder.tvGiaBia.setText("Giá bìa :" + listSach.get(position).getGiabia() + "");
+        xemHoaDonHolder.tvGiaBia.setText("Giá bìa : " + listSach.get(position).getGiabia() + "");
 
-        xemHoaDonHolder.tvSoLuong.setText("Số lượng :" + soLuong.get(position) + "");
-        xemHoaDonHolder.tvMaSach.setText("Mã sách :" + listSach.get(position).getMasach());
+        xemHoaDonHolder.tvSoLuong.setText("Số lượng : " + soLuong.get(position) + "");
+        xemHoaDonHolder.tvMaSach.setText("Mã sách : " + listSach.get(position).getMasach());
         double giatien = listSach.get(position).getGiabia() * soLuong.get(position);
-        xemHoaDonHolder.tvThanhTien.setText("Thành tiền :" + giatien + "");
+        xemHoaDonHolder.tvThanhTien.setText("Thành tiền : " + giatien + "");
 
         xemHoaDonHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override

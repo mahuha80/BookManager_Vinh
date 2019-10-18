@@ -1,14 +1,14 @@
 package com.example.bookmanager_vinh.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.LvXemHoaDonAdapter;
@@ -44,12 +44,13 @@ public class XemHoaDonActivity extends AppCompatActivity {
             soLuong = intent.getIntegerArrayListExtra("soLuong");
             lvXemHoaDonAdapter = new LvXemHoaDonAdapter(this, listSach, soLuong);
             lvXemHoaDon.setAdapter(lvXemHoaDonAdapter);
-            double tong = 0;
-            for (int i = 0; i < listSach.size(); i++) {
-                tong += listSach.get(i).getGiabia() * soLuong.get(i);
-            }
-            tvTongTien.setText("Tổng tiền :" +tong);
         }
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void init() {
@@ -59,6 +60,6 @@ public class XemHoaDonActivity extends AppCompatActivity {
         soLuong = new ArrayList<>();
         lvXemHoaDon = findViewById(R.id.lvXemHoaDon);
         tvTongTien=findViewById(R.id.tvTongTien);
-
+        btnThanhToan=findViewById(R.id.btnThanhToan);
     }
 }

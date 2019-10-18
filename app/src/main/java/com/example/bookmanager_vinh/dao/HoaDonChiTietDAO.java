@@ -1,4 +1,41 @@
 package com.example.bookmanager_vinh.dao;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.bookmanager_vinh.database.DatabaseHelper;
+import com.example.bookmanager_vinh.model.HoaDonChiTiet;
+
+import java.text.SimpleDateFormat;
+
 public class HoaDonChiTietDAO {
+    public static final String TABLE_NAME = "HoaDonChiTet";
+    public static final String SQL_NGUOI_DUNG = "" +
+            "CREATE TABLE HoaDonChiTet (maHDCT integer primary key autoincrement, maHoaDon text, maSach text, soLuong integer)";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    private SQLiteDatabase db;
+    private DatabaseHelper dbHelper;
+
+    public HoaDonChiTietDAO(Context context) {
+        dbHelper = new DatabaseHelper(context);
+        db = dbHelper.getWritableDatabase();
+    }
+
+    public long insertHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("maHoaDon", hoaDonChiTiet.getHoaDon().getMaHoaDon());
+        contentValues.put("maSach", hoaDonChiTiet.getSach().getMasach());
+        contentValues.put("soLuong", hoaDonChiTiet.getSoLuongMua());
+        return db.insert(TABLE_NAME, null, contentValues);
+    }
+
+    public int updateHoaDonChiTiet(HoaDonChiTiet hoaDonChiTiet) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("maHoaDon", hoaDonChiTiet.getHoaDon().getMaHoaDon());
+        contentValues.put("maSach", hoaDonChiTiet.getSach().getMasach());
+        contentValues.put("soLuong", hoaDonChiTiet.getSoLuongMua());
+        return db.update(TABLE_NAME, contentValues, "maHDCT=?", new String[]{hoaDonChiTiet.getMaHDCT() + ""});
+    }
+
 }
