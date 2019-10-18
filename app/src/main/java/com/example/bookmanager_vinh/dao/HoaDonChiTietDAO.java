@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 
 public class HoaDonChiTietDAO {
     public static final String TABLE_NAME = "HoaDonChiTet";
-    public static final String SQL_NGUOI_DUNG = "" +
+    public static final String SQL_HOA_DON_CHI_TIET = "" +
             "CREATE TABLE HoaDonChiTet (maHDCT integer primary key autoincrement, maHoaDon text, maSach text, soLuong integer)";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
     private SQLiteDatabase db;
