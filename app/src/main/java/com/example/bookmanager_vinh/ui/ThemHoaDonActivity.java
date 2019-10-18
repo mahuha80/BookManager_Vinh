@@ -25,6 +25,7 @@ import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,7 +41,8 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     Button btnThemVaoGioHang, btnXemHoaDon;
     LvThemHoaDonAdapter lvThemHoaDonAdapter;
     Intent intentXemHoaDon;
-    Date currentTime;
+    Date date;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
 
     @Override
@@ -70,17 +72,17 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 edMaHD.setEnabled(false);
                 edNgayMua.setEnabled(false);
                 String soLuong = edSoLuong.getText().toString();
-                if(Integer.parseInt(soLuong)>sach.getSoluong()){
-                    Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách trong kho là :"+sach.getSoluong() , Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(soLuong) > sach.getSoluong()) {
+                    Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách trong kho là :" + sach.getSoluong(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(maHoaDon.length()>0&&edSoLuong.length()>0){
+                if (maHoaDon.length() > 0 && edSoLuong.length() > 0) {
                     edMaHD.setEnabled(false);
                 }
-                HoaDon hoaDon = new HoaDon(maHoaDon, currentTime);
-                Log.e("AAA",soLuong+"");
+                HoaDon hoaDon = new HoaDon(maHoaDon, date);
+                Log.e("AAA", soLuong + "");
                 HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
-                Log.e("AAA",hoaDonChiTiet1.getSoLuongMua()+"");
+                Log.e("AAA", hoaDonChiTiet1.getSoLuongMua() + "");
                 listHoaDonChiTietDraft.add(hoaDonChiTiet1);
 
                 lvThemHoaDonAdapter.notifyDataSetChanged();
@@ -91,21 +93,21 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentXemHoaDon=new Intent(ThemHoaDonActivity.this,XemHoaDonActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("mahoadon",edMaHD.getText().toString());
-                bundle.putString("ngaymua",edNgayMua.getText().toString());
-                List<Sach> sachHoaDon=new ArrayList<>();
-                ArrayList<Integer> soLuong=new ArrayList<>();
-                for(int i=0;i<listHoaDonChiTietDraft.size();i++){
-                    Sach sach=listHoaDonChiTietDraft.get(i).getSach();
+                intentXemHoaDon = new Intent(ThemHoaDonActivity.this, XemHoaDonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mahoadon", edMaHD.getText().toString());
+                bundle.putString("ngaymua", edNgayMua.getText().toString());
+                List<Sach> sachHoaDon = new ArrayList<>();
+                ArrayList<Integer> soLuong = new ArrayList<>();
+                for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
+                    Sach sach = listHoaDonChiTietDraft.get(i).getSach();
                     sachHoaDon.add(sach);
                     soLuong.add(listHoaDonChiTietDraft.get(i).getSoLuongMua());
-                    Log.e("AAA",sach.getSoluong()+"--"+sach.getTensach());
+                    Log.e("AAA", sach.getSoluong() + "--" + sach.getTensach());
                 }
-                intentXemHoaDon.putIntegerArrayListExtra("soLuong",soLuong);
+                intentXemHoaDon.putIntegerArrayListExtra("soLuong", soLuong);
                 intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
-                intentXemHoaDon.putExtra("Bundle",bundle);
+                intentXemHoaDon.putExtra("Bundle", bundle);
                 startActivity(intentXemHoaDon);
 
             }
@@ -148,9 +150,10 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        currentTime=Calendar.getInstance().getTime();
-        edNgayMua.setText(currentTime.toString());
+        date=new Date();
+        edNgayMua.setText(simpleDateFormat.format(date));
         edNgayMua.setEnabled(false);
+        Toast.makeText(this, date.toString(), Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -18,7 +18,7 @@ public class HoaDonDAO {
     public static final String TABLE_NAME = "HoaDon";
     public static final String SQL_HOA_DON = "" +
             "CREATE TABLE HoaDon (mahoadon text primary key, ngaymua date)";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 

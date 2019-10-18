@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class XemHoaDonActivity extends AppCompatActivity {
     EditText edMaHoaDon, edNgayMua;
@@ -36,9 +37,9 @@ public class XemHoaDonActivity extends AppCompatActivity {
     Button btnThanhToan;
     List<HoaDonChiTiet> listHoaDonChiTiet;
     String maHoaDon, ngayMua;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
     HoaDonChiTietDAO hoaDonChiTietDAO;
     HoaDonDAO hoaDonDAO;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
 
     @Override
@@ -52,8 +53,8 @@ public class XemHoaDonActivity extends AppCompatActivity {
             maHoaDon = bundle.getString("mahoadon");
             ngayMua = bundle.getString("ngaymua");
             edMaHoaDon.setText(maHoaDon);
-            edNgayMua.setText(ngayMua);
             edMaHoaDon.setEnabled(false);
+            edNgayMua.setText(ngayMua);
             edNgayMua.setEnabled(false);
             listSach = (List<Sach>) intent.getSerializableExtra("list");
             soLuong = intent.getIntegerArrayListExtra("soLuong");
@@ -64,8 +65,11 @@ public class XemHoaDonActivity extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date = new Date();
-                HoaDon hoaDon = new HoaDon(maHoaDon, date);
+                HoaDon hoaDon = null;
+
+                hoaDon = new HoaDon(maHoaDon, new Date());
+
+
                 for (int i = 0; i < listSach.size(); i++) {
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, listSach.get(i), soLuong.get(i));
                     long result1 = hoaDonDAO.insertHoaDon(hoaDon);

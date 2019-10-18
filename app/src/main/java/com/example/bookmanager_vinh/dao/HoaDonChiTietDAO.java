@@ -13,7 +13,6 @@ public class HoaDonChiTietDAO {
     public static final String TABLE_NAME = "HoaDonChiTiet";
     public static final String SQL_HOA_DON_CHI_TIET = "" +
             "CREATE TABLE HoaDonChiTiet (mahdct integer primary key autoincrement, mahoadon text, masach text, soluong integer)";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 
