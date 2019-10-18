@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:hint="Tên đăng nhập" />
+        android:hint="Tên đăng nhập"
+        android:maxLength="10"/>
 
     <EditText
         android:id="@+id/edMatKhau"

@@ -67,6 +67,7 @@ public class ThemNguoiDungActivity extends AppCompatActivity {
         boolean isInsertTrue = nguoiDungDAO.insertNguoiDung(nguoiDung);
         if (isInsertTrue) {
             Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            finish();
 
         } else {
             Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show();

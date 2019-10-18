@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -71,6 +72,10 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 edMaHD.setEnabled(false);
                 edNgayMua.setEnabled(false);
                 String soLuong = edSoLuong.getText().toString();
+                if(Integer.parseInt(soLuong)>sach.getSoluong()){
+                    Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách trong kho là :"+sach.getSoluong() , Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 HoaDon hoaDon = new HoaDon(maHoaDon, date);
                 HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
                 if(maHoaDon.length()>0&&edSoLuong.length()>0){
