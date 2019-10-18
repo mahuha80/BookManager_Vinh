@@ -59,32 +59,35 @@ public class XemHoaDonActivity extends AppCompatActivity {
             soLuong = intent.getIntegerArrayListExtra("soLuong");
             lvXemHoaDonAdapter = new LvXemHoaDonAdapter(this, listSach, soLuong);
             lvXemHoaDon.setAdapter(lvXemHoaDonAdapter);
-            double tongTien = 0;
-            for (int i = 0; i < listSach.size(); i++) {
-                tongTien += listSach.get(i).getGiabia() * soLuong.get(i);
-            }
-            tvTongTien.setText(tongTien + "");
+            setTongTien();
         }
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date =new Date();
+                Date date = new Date();
                 HoaDon hoaDon = new HoaDon(maHoaDon, date);
                 for (int i = 0; i < listSach.size(); i++) {
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, listSach.get(i), soLuong.get(i));
+                    long result1 = hoaDonDAO.insertHoaDon(hoaDon);
                     long result = hoaDonChiTietDAO.insertHoaDonChiTiet(hoaDonChiTiet);
-                    long result1 =hoaDonDAO.insertHoaDon(hoaDon);
-                    if (result > 0 && result1>0) {
+                    if (result > 0) {
                         Toast.makeText(XemHoaDonActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(XemHoaDonActivity.this, "That bai", Toast.LENGTH_SHORT).show();
                     }
                 }
-                Toast.makeText(XemHoaDonActivity.this, "OK", Toast.LENGTH_SHORT).show();
 
 
             }
         });
+    }
+
+    private void setTongTien() {
+        double tongTien = 0;
+        for (int i = 0; i < listSach.size(); i++) {
+            tongTien += listSach.get(i).getGiabia() * soLuong.get(i);
+        }
+        tvTongTien.setText("Tổng tiền : " + tongTien + "");
     }
 
     private void init() {

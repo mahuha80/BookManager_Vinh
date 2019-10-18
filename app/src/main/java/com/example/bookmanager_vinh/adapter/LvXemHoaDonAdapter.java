@@ -50,7 +50,7 @@ public class LvXemHoaDonAdapter extends BaseAdapter {
             xemHoaDonHolder.tvSoLuong = convertView.findViewById(R.id.tvSoLuongXHD);
             xemHoaDonHolder.tvGiaBia = convertView.findViewById(R.id.tvGiaBiaXHD);
             xemHoaDonHolder.tvThanhTien = convertView.findViewById(R.id.tvThanhTienXHD);
-            xemHoaDonHolder.imgXoa = convertView.findViewById(R.id.imgXoaXHD);
+//            xemHoaDonHolder.imgXoa = convertView.findViewById(R.id.imgXoaXHD);
             convertView.setTag(xemHoaDonHolder);
         } else {
             xemHoaDonHolder = (XemHoaDonHolder) convertView.getTag();
@@ -61,22 +61,22 @@ public class LvXemHoaDonAdapter extends BaseAdapter {
         xemHoaDonHolder.tvMaSach.setText("Mã sách : " + listSach.get(position).getMasach());
         double giatien = listSach.get(position).getGiabia() * soLuong.get(position);
         xemHoaDonHolder.tvThanhTien.setText("Thành tiền : " + giatien + "");
-
-        xemHoaDonHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listSach.remove(position);
-                soLuong.remove(position);
-                notifyDataSetChanged();
-            }
-        });
+//
+//        xemHoaDonHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listSach.remove(position);
+//                soLuong.remove(position);
+//                notifyDataSetChanged();
+//            }
+//        });
 
         return convertView;
     }
 
     public class XemHoaDonHolder {
         TextView tvMaSach, tvSoLuong, tvGiaBia, tvThanhTien;
-        ImageView imgXoa;
+//        ImageView imgXoa;
     }
 
 }
