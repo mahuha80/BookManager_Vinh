@@ -25,8 +25,6 @@ import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -76,16 +74,15 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                     Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách trong kho là :"+sach.getSoluong() , Toast.LENGTH_SHORT).show();
                     return;
                 }
-                HoaDon hoaDon = new HoaDon(maHoaDon, date);
-                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
                 if(maHoaDon.length()>0&&edSoLuong.length()>0){
                     edMaHD.setEnabled(false);
                 }
-                Sach sach = (Sach) spinner.getSelectedItem()
-                int soLuong = Integer.parseInt(edSoLuong.getText().toString());
-                HoaDon hoaDon = new HoaDon(maHoaDon, null);
-                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, sach, soLuong);
-                listHoaDonChiTietDraft.add(hoaDonChiTiet);
+                HoaDon hoaDon = new HoaDon(maHoaDon, currentTime);
+                Log.e("AAA",soLuong+"");
+                HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
+                Log.e("AAA",hoaDonChiTiet1.getSoLuongMua()+"");
+                listHoaDonChiTietDraft.add(hoaDonChiTiet1);
+
                 lvThemHoaDonAdapter.notifyDataSetChanged();
 
             }
@@ -101,9 +98,10 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                 List<Sach> sachHoaDon=new ArrayList<>();
                 ArrayList<Integer> soLuong=new ArrayList<>();
                 for(int i=0;i<listHoaDonChiTietDraft.size();i++){
-                    Sach sach1=listHoaDonChiTietDraft.get(i).getSach();
-                    sachHoaDon.add(sach1);
-                    soLuong.add(sach1.getSoluong());
+                    Sach sach=listHoaDonChiTietDraft.get(i).getSach();
+                    sachHoaDon.add(sach);
+                    soLuong.add(listHoaDonChiTietDraft.get(i).getSoLuongMua());
+                    Log.e("AAA",sach.getSoluong()+"--"+sach.getTensach());
                 }
                 intentXemHoaDon.putIntegerArrayListExtra("soLuong",soLuong);
                 intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
