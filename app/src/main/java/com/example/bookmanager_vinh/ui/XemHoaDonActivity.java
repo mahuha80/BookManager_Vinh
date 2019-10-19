@@ -16,6 +16,7 @@ import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.LvXemHoaDonAdapter;
 import com.example.bookmanager_vinh.dao.HoaDonChiTietDAO;
 import com.example.bookmanager_vinh.dao.HoaDonDAO;
+import com.example.bookmanager_vinh.dao.SachDAO;
 import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
@@ -39,6 +40,7 @@ public class XemHoaDonActivity extends AppCompatActivity {
     String maHoaDon, ngayMua;
     HoaDonChiTietDAO hoaDonChiTietDAO;
     HoaDonDAO hoaDonDAO;
+    SachDAO sachDAO;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
 
@@ -68,14 +70,18 @@ public class XemHoaDonActivity extends AppCompatActivity {
                 HoaDon hoaDon = null;
 
                 hoaDon = new HoaDon(maHoaDon, new Date());
-
-
                 for (int i = 0; i < listSach.size(); i++) {
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, listSach.get(i), soLuong.get(i));
                     long result1 = hoaDonDAO.insertHoaDon(hoaDon);
                     long result = hoaDonChiTietDAO.insertHoaDonChiTiet(hoaDonChiTiet);
                     if (result > 0) {
-                        Toast.makeText(XemHoaDonActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                        Sach sach = listSach.get(i);
+                        Sach sachUpdate = new Sach(sach.getMasach(), sach.getMatheloai(), sach.getTensach()
+                                , sach.getTacgia(), sach.getNxb(), sach.getGiabia(), sach.getSoluong() - soLuong.get(i));
+                        int resultUpdateSach = sachDAO.updateSach(sachUpdate);
+                        if (resultUpdateSach > 0) {
+                            Toast.makeText(XemHoaDonActivity.this, "Thành Công !", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(XemHoaDonActivity.this, "That bai", Toast.LENGTH_SHORT).show();
                     }
@@ -105,5 +111,6 @@ public class XemHoaDonActivity extends AppCompatActivity {
         listHoaDonChiTiet = new ArrayList<>();
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
         hoaDonDAO = new HoaDonDAO(this);
+        sachDAO = new SachDAO(this);
     }
 }

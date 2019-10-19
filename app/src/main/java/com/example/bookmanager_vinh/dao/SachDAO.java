@@ -41,7 +41,7 @@ public class SachDAO {
         return db.delete(TABLE_NAME, "masach=?", new String[]{masach});
     }
 
-    public long updateSach(Sach sach) {
+    public int updateSach(Sach sach) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("masach", sach.getMasach());
         contentValues.put("matheloai", sach.getMatheloai());
