@@ -57,7 +57,6 @@ public class ThemHoaDonActivity extends AppCompatActivity {
 
 
         spinner.setAdapter(spThemHoaDonAdapter);
-        Sach sach = (Sach) spinner.getSelectedItem();
 //       get day month year
 
 
@@ -66,26 +65,38 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final Sach sach = (Sach) spinner.getSelectedItem();
+                if (listHoaDonChiTietDraft.size() > 0) {
+                    int index = -1;
+                    for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
+                        if (sach.getMasach().equals(listHoaDonChiTietDraft.get(i).getSach().getMasach())) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index >= 0) {
+                        int tongSoLuongSach = listHoaDonChiTietDraft.get(index).getSach().getSoluong();
+                        if ((listHoaDonChiTietDraft.get(index).getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString())) > tongSoLuongSach) {
+                            Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách tối đa mà bạn có thể mua là " + (tongSoLuongSach - listHoaDonChiTietDraft.get(index).getSoLuongMua()) + "", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            HoaDonChiTiet hoaDonChiTiet = listHoaDonChiTietDraft.get(index);
+                            int soLuong = hoaDonChiTiet.getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString());
+                            HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDonChiTiet.getHoaDon(),
+                                    sach, soLuong);
+                            listHoaDonChiTietDraft.set(index, hoaDonChiTiet1);
+                            lvThemHoaDonAdapter.notifyDataSetChanged();
+                        }
 
-                String maHoaDon = edMaHD.getText().toString();
-                Sach sach = (Sach) spinner.getSelectedItem();
-                edMaHD.setEnabled(false);
-                edNgayMua.setEnabled(false);
-                String soLuong = edSoLuong.getText().toString();
-                if (Integer.parseInt(soLuong) > sach.getSoluong()) {
-                    Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách trong kho là :" + sach.getSoluong(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (maHoaDon.length() > 0 && edSoLuong.length() > 0) {
-                    edMaHD.setEnabled(false);
-                }
-                HoaDon hoaDon = new HoaDon(maHoaDon, date);
-                Log.e("AAA", soLuong + "");
-                HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
-                Log.e("AAA", hoaDonChiTiet1.getSoLuongMua() + "");
-                listHoaDonChiTietDraft.add(hoaDonChiTiet1);
 
-                lvThemHoaDonAdapter.notifyDataSetChanged();
+                    } else {
+                        themVaoGioHang();
+                    }
+                } else {
+                    themVaoGioHang();
+
+                }
+
 
             }
         });
@@ -103,7 +114,6 @@ public class ThemHoaDonActivity extends AppCompatActivity {
                     Sach sach = listHoaDonChiTietDraft.get(i).getSach();
                     sachHoaDon.add(sach);
                     soLuong.add(listHoaDonChiTietDraft.get(i).getSoLuongMua());
-                    Log.e("AAA", sach.getSoluong() + "--" + sach.getTensach());
                 }
                 intentXemHoaDon.putIntegerArrayListExtra("soLuong", soLuong);
                 intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
@@ -114,6 +124,22 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void themVaoGioHang() {
+        final Sach sach = (Sach) spinner.getSelectedItem();
+        String maHoaDon = edMaHD.getText().toString();
+        edMaHD.setEnabled(false);
+        edNgayMua.setEnabled(false);
+        String soLuong = edSoLuong.getText().toString();
+        if (Integer.parseInt(soLuong) > sach.getSoluong()) {
+            Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách còn lại trong kho là :" + sach.getSoluong(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        HoaDon hoaDon = new HoaDon(maHoaDon, date);
+        HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
+        listHoaDonChiTietDraft.add(hoaDonChiTiet1);
+        lvThemHoaDonAdapter.notifyDataSetChanged();
     }
 
     private void init() {
@@ -150,7 +176,7 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        date=new Date();
+        date = new Date();
         edNgayMua.setText(simpleDateFormat.format(date));
         edNgayMua.setEnabled(false);
         Toast.makeText(this, date.toString(), Toast.LENGTH_SHORT).show();
