@@ -16,7 +16,7 @@ import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "dbBookManager";
-    public static final int version = 7;
+    public static final int version = 9;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, version);

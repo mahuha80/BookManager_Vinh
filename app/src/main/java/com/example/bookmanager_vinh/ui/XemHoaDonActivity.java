@@ -24,6 +24,7 @@ import com.example.bookmanager_vinh.model.Sach;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -69,7 +70,7 @@ public class XemHoaDonActivity extends AppCompatActivity {
             public void onClick(View view) {
                 HoaDon hoaDon = null;
 
-                hoaDon = new HoaDon(maHoaDon, new Date());
+                hoaDon = new HoaDon(maHoaDon, Calendar.getInstance().getTime());
                 for (int i = 0; i < listSach.size(); i++) {
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, listSach.get(i), soLuong.get(i));
                     long result1 = hoaDonDAO.insertHoaDon(hoaDon);
@@ -91,6 +92,7 @@ public class XemHoaDonActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void setTongTien() {
         double tongTien = 0;

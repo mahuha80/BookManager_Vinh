@@ -25,6 +25,7 @@ import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,8 +42,8 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     Button btnThemVaoGioHang, btnXemHoaDon;
     LvThemHoaDonAdapter lvThemHoaDonAdapter;
     Intent intentXemHoaDon;
-    Date date;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    Date date;
 
 
     @Override
@@ -136,7 +137,7 @@ public class ThemHoaDonActivity extends AppCompatActivity {
             Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách còn lại trong kho là :" + sach.getSoluong(), Toast.LENGTH_SHORT).show();
             return;
         }
-        HoaDon hoaDon = new HoaDon(maHoaDon, date);
+        HoaDon hoaDon = new HoaDon(maHoaDon, Calendar.getInstance().getTime());
         HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDon, sach, Integer.parseInt(soLuong));
         listHoaDonChiTietDraft.add(hoaDonChiTiet1);
         lvThemHoaDonAdapter.notifyDataSetChanged();
@@ -176,10 +177,12 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        date = new Date();
-        edNgayMua.setText(simpleDateFormat.format(date));
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        edNgayMua.setText(year + "-" + month + "-" + day);
         edNgayMua.setEnabled(false);
-        Toast.makeText(this, date.toString(), Toast.LENGTH_SHORT).show();
 
     }
 }
