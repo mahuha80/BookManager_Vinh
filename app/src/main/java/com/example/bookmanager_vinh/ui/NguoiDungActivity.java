@@ -36,10 +36,6 @@ public class NguoiDungActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         iconBack();
         init();
-        boolean result = nguoiDungDAO.insertNguoiDung(new NguoiDung("admin", "admin", "0987395971", "Vinh NT", 1));
-        if (result) {
-            Toast.makeText(this, "thanh cong", Toast.LENGTH_SHORT).show();
-        }
         LVDanhSachNguoiDungAdapter = new LvDanhSachNguoiDungAdapter(this, listNguoiDung);
         lvNguoiDung.setAdapter(LVDanhSachNguoiDungAdapter);
         final int role = nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin);

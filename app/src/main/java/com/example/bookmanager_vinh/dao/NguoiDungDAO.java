@@ -70,8 +70,6 @@ public class NguoiDungDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", nguoiDung.getUsername());
         contentValues.put("password", nguoiDung.getPass());
-//        contentValues.put("phone",nguoiDung.getPhone());
-//        contentValues.put("hoten",nguoiDung.getFullname());
         int result = db.update(TABLE_NAME, contentValues, "username=?", new String[]{nguoiDung.getUsername()});
         return result != -1;
     }
