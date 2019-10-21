@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -35,20 +36,32 @@ public class NguoiDungActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
         iconBack();
         init();
+        boolean result = nguoiDungDAO.insertNguoiDung(new NguoiDung("admin", "admin", "0987395971", "Vinh NT", 1));
+        if (result) {
+            Toast.makeText(this, "thanh cong", Toast.LENGTH_SHORT).show();
+        }
         LVDanhSachNguoiDungAdapter = new LvDanhSachNguoiDungAdapter(this, listNguoiDung);
         lvNguoiDung.setAdapter(LVDanhSachNguoiDungAdapter);
-        lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NguoiDung nguoiDungSelect = listNguoiDung.get(i);
-                intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("NguoiDung", nguoiDungSelect);
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+        final int role = nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin);
+        
+            lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                   if(role==1){
+                       NguoiDung nguoiDungSelect = listNguoiDung.get(i);
+                       intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
+                       Bundle bundle = new Bundle();
+                       bundle.putSerializable("NguoiDung", nguoiDungSelect);
+                       intent.putExtra("bundle", bundle);
+                       startActivity(intent);
+                   }else{
+                       Toast.makeText(NguoiDungActivity.this, "Bạn không có quyền sửa ", Toast.LENGTH_SHORT).show();
+                   }
 
-            }
-        });
+                }
+            });
+       
+
 
     }
 
@@ -87,7 +100,7 @@ public class NguoiDungActivity extends AppCompatActivity {
                 startActivity(new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class));
                 break;
             case R.id.logout_nguoidung:
-                Intent intentLogOut=new Intent(NguoiDungActivity.this, LoginActivity.class);
+                Intent intentLogOut = new Intent(NguoiDungActivity.this, LoginActivity.class);
                 intentLogOut.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentLogOut);
                 NguoiDungActivity.this.finish();

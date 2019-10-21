@@ -15,7 +15,8 @@ import java.util.List;
 public class NguoiDungDAO {
     public static final String TABLE_NAME = "NguoiDung";
     public static final String SQL_NGUOI_DUNG = "" +
-            "CREATE TABLE NguoiDung (username text primary key, password text, phone text ,hoten text)";
+            "CREATE TABLE NguoiDung (username text primary key, password text, phone text ,hoten text,role integer)";
+    public static String usernameLogin = "";
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 
@@ -30,6 +31,7 @@ public class NguoiDungDAO {
         contentValues.put("password", nd.getPass());
         contentValues.put("phone", nd.getPhone());
         contentValues.put("hoten", nd.getFullname());
+        contentValues.put("role", nd.getRole());
         long result = db.insert(TABLE_NAME, null, contentValues);
         try {
             if (result == -1) {
@@ -64,16 +66,6 @@ public class NguoiDungDAO {
         return db.delete(TABLE_NAME, "username=?", new String[]{tenNguoiDung});
     }
 
-//    public int updateNguoiDung(NguoiDung nd) {
-//        if (nd.getUsername().equals("admin")) return -1;
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("username", nd.getUsername());
-//        contentValues.put("password", nd.getPass());
-//        contentValues.put("phone", nd.getPhone());
-//        contentValues.put("hoten", nd.getFullname());
-//        return db.update(TABLE_NAME, contentValues, "username=?", new String[]{nd.getUsername()});
-//    }
-
     public boolean isChangePassword(NguoiDung nguoiDung) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", nguoiDung.getUsername());
@@ -88,12 +80,20 @@ public class NguoiDungDAO {
         String SQL = "SELECT username, password from NguoiDung where username=? and password=?";
         Cursor cursor = db.rawQuery(SQL, new String[]{nd.getUsername(), nd.getPass()});
         if (cursor.moveToFirst()) {
+            usernameLogin = nd.getUsername();
             return true;
+
         }
-        Log.e("ERROR1", cursor.toString() + "");
-
-
         return false;
+    }
+
+    public int getRoleViaUsername(String username) {
+        String sql = "SELECT role from " + TABLE_NAME + " where username = ?" ;
+        Cursor cursor = db.rawQuery(sql, new String[]{username});
+        cursor.moveToFirst();
+        int role=cursor.getInt(cursor.getColumnIndex("role"));
+        return role;
+
     }
 
 

@@ -19,10 +19,12 @@ public class SachDAO {
             " tacgia text ,nxb text ,giabia double , soluong integer)";
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
+    private NguoiDungDAO nguoiDungDAO;
 
     public SachDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
+        nguoiDungDAO = new NguoiDungDAO(context);
     }
 
     public long insertSach(Sach sach) {
@@ -55,7 +57,7 @@ public class SachDAO {
 
     public List<Sach> getAllSach() {
         List<Sach> listSach = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null, null);
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String maSach = cursor.getString(cursor.getColumnIndex("masach"));
@@ -63,11 +65,11 @@ public class SachDAO {
             String tensach = cursor.getString(cursor.getColumnIndex("tensach"));
             String tacgia = cursor.getString(cursor.getColumnIndex("tacgia"));
             String nxb = cursor.getString(cursor.getColumnIndex("nxb"));
-            double giabia =cursor.getDouble(cursor.getColumnIndex("giabia"));
+            double giabia = cursor.getDouble(cursor.getColumnIndex("giabia"));
             int soluong = cursor.getInt(cursor.getColumnIndex("soluong"));
             listSach.add(new Sach(maSach, matheloai, tensach, tacgia, nxb, giabia, soluong));
-            for(Sach sach:listSach){
-                Log.e("BUGG",sach.getMasach());
+            for (Sach sach : listSach) {
+                Log.e("BUGG", sach.getMasach());
             }
             cursor.moveToNext();
 

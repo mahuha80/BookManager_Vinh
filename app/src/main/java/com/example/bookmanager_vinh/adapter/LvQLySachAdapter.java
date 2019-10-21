@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookmanager_vinh.R;
+import com.example.bookmanager_vinh.dao.NguoiDungDAO;
 import com.example.bookmanager_vinh.dao.SachDAO;
 import com.example.bookmanager_vinh.model.Sach;
 
@@ -20,11 +21,13 @@ public class LvQLySachAdapter extends BaseAdapter {
     List<Sach> listSach;
     private Context context;
     SachDAO sachDAO;
+    NguoiDungDAO nguoiDungDAO;
 
     public LvQLySachAdapter(Context context, List<Sach> listSach) {
         this.context = context;
         this.listSach = listSach;
         sachDAO=new SachDAO(context);
+        nguoiDungDAO=new NguoiDungDAO(context);
     }
 
     @Override
@@ -62,16 +65,21 @@ public class LvQLySachAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Sach sach=listSach.get(i);
-                int result = sachDAO.deleteSach(sach.getMasach());
-                if (result > 0) {
-                    Toast.makeText(context, "Xoa thanh cong", Toast.LENGTH_SHORT).show();
-                    //ok
-                    listSach.remove(i);
-                    notifyDataSetChanged();
-                } else {
-                    Toast.makeText(context, "Xoa khong thanh cong", Toast.LENGTH_SHORT).show();
+                int role = nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin);
+                if (role == 1) {
+                    int result = sachDAO.deleteSach(sach.getMasach());
+                    if (result > 0) {
+                        Toast.makeText(context, "Xoa thanh cong", Toast.LENGTH_SHORT).show();
+                        listSach.remove(i);
+                        notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(context, "Xoa khong thanh cong", Toast.LENGTH_SHORT).show();
 
+                    }
+                } else {
+                    Toast.makeText(context, "Bạn không có quyền xóa", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
         return view;

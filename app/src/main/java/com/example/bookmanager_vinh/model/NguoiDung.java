@@ -7,26 +7,31 @@ public class NguoiDung implements Serializable{
     private String pass;
     private String phone;
     private String fullname;
+    private int role;
+
+    public NguoiDung(String username, String pass, String phone, String fullname, int role) {
+        this.username = username;
+        this.pass = pass;
+        this.phone = phone;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     public NguoiDung(String username, String pass, String phone, String fullname) {
         this.username = username;
         this.pass = pass;
         this.phone = phone;
         this.fullname = fullname;
+        this.role=2;
+    }
+
+    public NguoiDung() {
     }
 
     public NguoiDung(String username, String pass) {
         this.username = username;
         this.pass = pass;
     }
-
-    public NguoiDung() {
-        this.username = "no name";
-        this.pass = "123456";
-        this.phone = "123456";
-        this.fullname = "no name";
-    }
-
 
     public String getUsername() {
         return username;
@@ -58,5 +63,13 @@ public class NguoiDung implements Serializable{
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
