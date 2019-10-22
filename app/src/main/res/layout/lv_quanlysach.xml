@@ -21,7 +21,7 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/tvTenSach"
+                android:id="@+id/tvMaSach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -29,7 +29,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/tvGiaSach"
+                android:id="@+id/tvSoLuong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"

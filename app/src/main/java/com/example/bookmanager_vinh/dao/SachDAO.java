@@ -82,18 +82,17 @@ public class SachDAO {
         if (Integer.parseInt(month) < 10) {
             month = "0" + month;
         }
-        String sql = "select masach, SUM(soluong) as soLuong from HoaDonChiTiet inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon" +
-                "Where strftime('%m',HoaDon.ngaymua) ='" + month + "' GROUP BY masach ORDER BY soluong DESC LIMIT 10";
-        Cursor cursor = db.rawQuery(sql, null);
+        String sql = "select masach,Sum(soluong) from HoaDonChiTiet inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%m', HoaDon.ngaymua) = ? group by masach order by soluong desc limit 10";
+        Cursor cursor = db.rawQuery(sql, new String[]{month});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String maSach = cursor.getString(cursor.getColumnIndex("masach"));
-            String matheloai = cursor.getString(cursor.getColumnIndex("matheloai"));
-            String tensach = cursor.getString(cursor.getColumnIndex("tensach"));
-            String tacgia = cursor.getString(cursor.getColumnIndex("tacgia"));
-            String nxb = cursor.getString(cursor.getColumnIndex("nxb"));
-            double giabia = cursor.getDouble(cursor.getColumnIndex("giabia"));
-            int soluong = cursor.getInt(cursor.getColumnIndex("soluong"));
+            String maSach = cursor.getString(0);
+            String matheloai = "";
+            String tensach ="";
+            String tacgia = "";
+            String nxb = "";
+            double giabia = 0.0;
+            int soluong = cursor.getInt(1);
             listSach.add(new Sach(maSach, matheloai, tensach, tacgia, nxb, giabia, soluong));
             cursor.moveToNext();
         }

@@ -26,8 +26,8 @@ public class LvQLySachAdapter extends BaseAdapter {
     public LvQLySachAdapter(Context context, List<Sach> listSach) {
         this.context = context;
         this.listSach = listSach;
-        sachDAO=new SachDAO(context);
-        nguoiDungDAO=new NguoiDungDAO(context);
+        sachDAO = new SachDAO(context);
+        nguoiDungDAO = new NguoiDungDAO(context);
     }
 
     @Override
@@ -51,20 +51,20 @@ public class LvQLySachAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lv_quanlysach, viewGroup, false);
             sachHolder = new SachHolder();
-            sachHolder.tvTenSach = view.findViewById(R.id.tvTenSach);
-            sachHolder.tvGiaSach= view.findViewById(R.id.tvGiaSach);
-            sachHolder.imgXoa=view.findViewById(R.id.imgXoa);
+            sachHolder.tvMaSach = view.findViewById(R.id.tvMaSach);
+            sachHolder.tvSoLuong = view.findViewById(R.id.tvSoLuong);
+            sachHolder.imgXoa = view.findViewById(R.id.imgXoa);
             view.setTag(sachHolder);
         } else {
             sachHolder = (SachHolder) view.getTag();
         }
-        sachHolder.tvTenSach.setText(listSach.get(i).getTensach());
-        Log.e("DEBUG",listSach.get(i).getTensach()+"");
-        sachHolder.tvGiaSach.setText(listSach.get(i).getGiabia()+"");
+        sachHolder.tvMaSach.setText("Mã sách: " + listSach.get(i).getMasach());
+        Log.e("DEBUG", listSach.get(i).getTensach() + "");
+        sachHolder.tvSoLuong.setText("Số lượng: " + listSach.get(i).getSoluong() + "");
         sachHolder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Sach sach=listSach.get(i);
+                Sach sach = listSach.get(i);
                 int role = nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin);
                 if (role == 1) {
                     int result = sachDAO.deleteSach(sach.getMasach());
@@ -97,7 +97,7 @@ public class LvQLySachAdapter extends BaseAdapter {
     }
 
     private class SachHolder {
-        TextView tvTenSach, tvGiaSach;
+        TextView tvMaSach, tvSoLuong;
         ImageView imgXoa;
     }
 }
