@@ -13,7 +13,7 @@ import com.example.bookmanager_vinh.dao.NguoiDungDAO;
 import com.example.bookmanager_vinh.model.NguoiDung;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView imgNguoiDung, imgTheLoai, imgHoaDon, imgSach;
+    ImageView imgNguoiDung, imgTheLoai, imgHoaDon, imgSach,imgSachBanChay,imgThongKe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         imgTheLoai = findViewById(R.id.imgTheLoai);
         imgHoaDon = findViewById(R.id.imgHoaDon);
         imgSach = findViewById(R.id.imgSach);
+        imgSachBanChay=findViewById(R.id.imgSachBanChay);
+        imgThongKe=findViewById(R.id.imgThongKe);
         imgNguoiDung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +49,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, QLySachActivity.class));
+
+            }
+        });
+        imgSachBanChay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SachBanChayActivity.class));
+
+            }
+        });
+        imgThongKe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ThongKeActivity.class));
 
             }
         });

@@ -39,24 +39,23 @@ public class NguoiDungActivity extends AppCompatActivity {
         LVDanhSachNguoiDungAdapter = new LvDanhSachNguoiDungAdapter(this, listNguoiDung);
         lvNguoiDung.setAdapter(LVDanhSachNguoiDungAdapter);
         final int role = nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin);
-        
-            lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                   if(role==1){
-                       NguoiDung nguoiDungSelect = listNguoiDung.get(i);
-                       intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
-                       Bundle bundle = new Bundle();
-                       bundle.putSerializable("NguoiDung", nguoiDungSelect);
-                       intent.putExtra("bundle", bundle);
-                       startActivity(intent);
-                   }else{
-                       Toast.makeText(NguoiDungActivity.this, "Bạn không có quyền sửa ", Toast.LENGTH_SHORT).show();
-                   }
 
+        lvNguoiDung.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (role == 1|| NguoiDungDAO.usernameLogin.equals(listNguoiDung.get(i).getUsername())) {
+                    NguoiDung nguoiDungSelect = listNguoiDung.get(i);
+                    intent = new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("NguoiDung", nguoiDungSelect);
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(NguoiDungActivity.this, "Bạn không có quyền sửa ", Toast.LENGTH_SHORT).show();
                 }
-            });
-       
+
+            }
+        });
 
 
     }
@@ -92,6 +91,8 @@ public class NguoiDungActivity extends AppCompatActivity {
             case R.id.add_nguoidung:
                 startActivity(new Intent(NguoiDungActivity.this, ThemNguoiDungActivity.class));
                 break;
+
+
             case R.id.changepass_nguoidung:
                 startActivity(new Intent(NguoiDungActivity.this, DoiMatKhauActivity.class));
                 break;

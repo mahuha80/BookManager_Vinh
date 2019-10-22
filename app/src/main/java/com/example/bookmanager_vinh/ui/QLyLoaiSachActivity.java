@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.LvQLyLoaiSachAdapter;
+import com.example.bookmanager_vinh.dao.NguoiDungDAO;
 import com.example.bookmanager_vinh.dao.TheLoaiDAO;
 import com.example.bookmanager_vinh.model.LoaiSach;
 
@@ -28,6 +30,7 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
     private LvQLyLoaiSachAdapter LVQLyLoaiSachAdapter;
     private TheLoaiDAO theLoaiDAO;
     Intent intent;
+    NguoiDungDAO nguoiDungDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loai_sach);
         iconBack();
         theLoaiDAO = new TheLoaiDAO(this);
+        nguoiDungDAO=new NguoiDungDAO(this);
         lvQuanLyLoaiSach = findViewById(R.id.lvQLyLoaiSach);
         listLoaiSach = new ArrayList<>();
         listLoaiSach = theLoaiDAO.getAllLoaiSach();
@@ -43,12 +47,17 @@ public class QLyLoaiSachActivity extends AppCompatActivity {
         lvQuanLyLoaiSach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                intent=new Intent(QLyLoaiSachActivity.this,SuaTheLoaiActivity.class);
-                Bundle bundle=new Bundle();
-                LoaiSach loaiSach=listLoaiSach.get(i);
-                bundle.putSerializable("LoaiSach",loaiSach);
-                intent.putExtra("Bundle",bundle);
-                startActivity(intent);
+                if (nguoiDungDAO.getRoleViaUsername(NguoiDungDAO.usernameLogin) == 1) {
+                    intent = new Intent(QLyLoaiSachActivity.this, SuaTheLoaiActivity.class);
+                    Bundle bundle = new Bundle();
+                    LoaiSach loaiSach = listLoaiSach.get(i);
+                    bundle.putSerializable("LoaiSach", loaiSach);
+                    intent.putExtra("Bundle", bundle);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(QLyLoaiSachActivity.this, "Bạn không có quyền sửa", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
 
