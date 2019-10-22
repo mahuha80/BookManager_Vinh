@@ -60,7 +60,6 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         spinner.setAdapter(spThemHoaDonAdapter);
 //       get day month year
 
-
         lvThemHoaDonAdapter = new LvThemHoaDonAdapter(this, listHoaDonChiTietDraft);
         lvThemHoaDon.setAdapter(lvThemHoaDonAdapter);
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {

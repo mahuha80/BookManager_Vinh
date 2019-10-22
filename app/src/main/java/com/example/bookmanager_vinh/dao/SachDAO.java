@@ -76,5 +76,32 @@ public class SachDAO {
         }
         return listSach;
     }
+
+    public List<Sach> getSachTop10(String month) {
+        List<Sach> listSach = new ArrayList<>();
+        if (Integer.parseInt(month) < 10) {
+            month = "0" + month;
+        }
+        String sql = "select masach, SUM(soluong) as soLuong from HoaDonChiTiet inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon" +
+                "Where strftime('%m',HoaDon.ngaymua) ='" + month + "' GROUP BY masach ORDER BY soluong DESC LIMIT 10";
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String maSach = cursor.getString(cursor.getColumnIndex("masach"));
+            String matheloai = cursor.getString(cursor.getColumnIndex("matheloai"));
+            String tensach = cursor.getString(cursor.getColumnIndex("tensach"));
+            String tacgia = cursor.getString(cursor.getColumnIndex("tacgia"));
+            String nxb = cursor.getString(cursor.getColumnIndex("nxb"));
+            double giabia = cursor.getDouble(cursor.getColumnIndex("giabia"));
+            int soluong = cursor.getInt(cursor.getColumnIndex("soluong"));
+            listSach.add(new Sach(maSach, matheloai, tensach, tacgia, nxb, giabia, soluong));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+
+        return listSach;
+
+    }
 }
 

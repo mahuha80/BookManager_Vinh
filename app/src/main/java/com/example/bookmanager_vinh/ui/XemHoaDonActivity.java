@@ -42,7 +42,8 @@ public class XemHoaDonActivity extends AppCompatActivity {
     HoaDonChiTietDAO hoaDonChiTietDAO;
     HoaDonDAO hoaDonDAO;
     SachDAO sachDAO;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat simpleDateFormatSave = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
     @Override
@@ -69,8 +70,20 @@ public class XemHoaDonActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 HoaDon hoaDon = null;
-
-                hoaDon = new HoaDon(maHoaDon, Calendar.getInstance().getTime());
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                int second = calendar.get(Calendar.SECOND);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH)+1;
+                int year = calendar.get(Calendar.YEAR);
+                String date = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+                try {
+                    hoaDon = new HoaDon(maHoaDon, simpleDateFormatSave.parse(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Toast.makeText(XemHoaDonActivity.this, "Khong luu duoc ngay gio", Toast.LENGTH_SHORT).show();
+                }
                 for (int i = 0; i < listSach.size(); i++) {
                     HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(hoaDon, listSach.get(i), soLuong.get(i));
                     long result1 = hoaDonDAO.insertHoaDon(hoaDon);
