@@ -42,6 +42,10 @@ public class SachBanChayActivity extends AppCompatActivity {
                 if (listSach.size() > 0) {
                     lvQLySachAdapter = new LvQLySachAdapter(SachBanChayActivity.this, listSach);
                     lvSachBanChay.setAdapter(lvQLySachAdapter);
+                }else{
+                    listSach.clear();
+                    lvQLySachAdapter=new LvQLySachAdapter(SachBanChayActivity.this,listSach);
+                    lvSachBanChay.setAdapter(lvQLySachAdapter);
                 }
 
             }

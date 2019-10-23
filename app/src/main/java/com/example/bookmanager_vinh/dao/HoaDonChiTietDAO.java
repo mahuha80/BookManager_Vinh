@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.bookmanager_vinh.database.DatabaseHelper;
 import com.example.bookmanager_vinh.model.HoaDon;
@@ -41,11 +43,38 @@ public class HoaDonChiTietDAO {
 
     public double getDoanhThuTheoNgay(String ngaymua) {
         double doanhThu = 0;
-        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as 'tongtien' from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%d', HoaDon.ngaymua)=?  group by HoaDonChiTiet.masach)tmp";
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%d', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
         Cursor c = db.rawQuery(sSQL, new String[]{ngaymua});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             doanhThu = c.getDouble(0);
+            Log.e("Doanhthu",doanhThu+"");
+            c.moveToNext();
+        }
+        c.close();
+        return doanhThu;
+    }
+    public double getDoanhThuTheoThang(String thangmua){
+        double doanhThu = 0;
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%m', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
+        Cursor c = db.rawQuery(sSQL, new String[]{thangmua});
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            doanhThu = c.getDouble(0);
+            Log.e("Doanhthu",doanhThu+"");
+            c.moveToNext();
+        }
+        c.close();
+        return doanhThu;
+    }
+    public double getDoanhThuTheoNam(String nammua){
+        double doanhThu = 0;
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%Y', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
+        Cursor c = db.rawQuery(sSQL, new String[]{nammua});
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            doanhThu = c.getDouble(0);
+            Log.e("Doanhthu",doanhThu+"");
             c.moveToNext();
         }
         c.close();
