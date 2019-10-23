@@ -95,6 +95,7 @@ public class XemHoaDonActivity extends AppCompatActivity {
                         int resultUpdateSach = sachDAO.updateSach(sachUpdate);
                         if (resultUpdateSach > 0) {
                             Toast.makeText(XemHoaDonActivity.this, "Thành Công !", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(XemHoaDonActivity.this,MainActivity.class));
                         }
                     } else {
                         Toast.makeText(XemHoaDonActivity.this, "That bai", Toast.LENGTH_SHORT).show();

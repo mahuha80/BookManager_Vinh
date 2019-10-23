@@ -23,7 +23,8 @@ public class ThongKeActivity extends AppCompatActivity {
         tvThangNay = findViewById(R.id.tvThangNay);
         tvNamNay = findViewById(R.id.tvNamNay);
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
-        double doanhthungay= hoaDonChiTietDAO.getDoanhThuTheoNgay(""+Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        Toast.makeText(this, Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"", Toast.LENGTH_SHORT).show();
+        double doanhthungay= hoaDonChiTietDAO.getDoanhThuTheoNgay();
         tvHomNay.setText("Hôm nay: "+doanhthungay);
         int month=Calendar.getInstance().get(Calendar.MONTH)+1;
         double doanhthuthang=hoaDonChiTietDAO.getDoanhThuTheoThang(month+"");

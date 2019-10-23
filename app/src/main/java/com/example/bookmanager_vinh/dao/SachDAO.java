@@ -82,7 +82,7 @@ public class SachDAO {
         if (Integer.parseInt(month) < 10) {
             month = "0" + month;
         }
-        String sql = "select masach,Sum(soluong) from HoaDonChiTiet inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%m', HoaDon.ngaymua) = ? group by masach order by soluong desc limit 10";
+        String sql = "select masach,Sum(soluong) from HoaDonChiTiet inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%m', HoaDon.ngaymua) = ? group by masach order by soluong asc limit 10";
         Cursor cursor = db.rawQuery(sql, new String[]{month});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

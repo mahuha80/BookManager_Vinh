@@ -41,10 +41,10 @@ public class HoaDonChiTietDAO {
         return db.update(TABLE_NAME, contentValues, "maHDCT=?", new String[]{hoaDonChiTiet.getMaHDCT() + ""});
     }
 
-    public double getDoanhThuTheoNgay(String ngaymua) {
+    public double getDoanhThuTheoNgay() {
         double doanhThu = 0;
-        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%d', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
-        Cursor c = db.rawQuery(sSQL, new String[]{ngaymua});
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where HoaDon.ngaymua=strftime('%m','now')  group by HoaDonChiTiet.masach)";
+        Cursor c = db.rawQuery(sSQL, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             doanhThu = c.getDouble(0);
