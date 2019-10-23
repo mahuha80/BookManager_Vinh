@@ -3,6 +3,7 @@ package com.example.bookmanager_vinh.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +24,9 @@ public class ThongKeActivity extends AppCompatActivity {
         tvThangNay = findViewById(R.id.tvThangNay);
         tvNamNay = findViewById(R.id.tvNamNay);
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
-        double doanhthungay= hoaDonChiTietDAO.getDoanhThuTheoNgay(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"");
-        tvHomNay.setText("Hôm nay: "+doanhthungay);
-        int month=Calendar.getInstance().get(Calendar.MONTH)+1;
-        double doanhthuthang=hoaDonChiTietDAO.getDoanhThuTheoThang(month+"");
-        tvThangNay.setText("Tháng này: "+doanhthuthang+"");
-        int year=Calendar.getInstance().get(Calendar.YEAR);
-        double doanhthunam=hoaDonChiTietDAO.getDoanhThuTheoNam(year+"");
-        tvNamNay.setText("Năm nay: "+doanhthunam+"");
+        tvHomNay.setText("Hôm nay :"+hoaDonChiTietDAO.getDoanhThuTheoNgay());
+        tvThangNay.setText("Tháng này: "+hoaDonChiTietDAO.getDoanhThuTheoThang()+"");
+        tvNamNay.setText("Năm nay: "+hoaDonChiTietDAO.getDoanhThuTheoNam()+"");
 
 
 
