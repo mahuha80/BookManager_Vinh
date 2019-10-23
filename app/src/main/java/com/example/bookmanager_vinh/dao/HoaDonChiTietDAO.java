@@ -41,10 +41,13 @@ public class HoaDonChiTietDAO {
         return db.update(TABLE_NAME, contentValues, "maHDCT=?", new String[]{hoaDonChiTiet.getMaHDCT() + ""});
     }
 
-    public double getDoanhThuTheoNgay() {
+    public double getDoanhThuTheoNgay(String ngay) {
         double doanhThu = 0;
-        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where HoaDon.ngaymua=strftime('%m','now')  group by HoaDonChiTiet.masach)";
-        Cursor c = db.rawQuery(sSQL, null);
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong)" +
+                " as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon" +
+                "  inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%d',?)" +
+                "  group by HoaDonChiTiet.masach)";
+        Cursor c = db.rawQuery(sSQL, new String[]{ngay});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             doanhThu = c.getDouble(0);
@@ -56,7 +59,10 @@ public class HoaDonChiTietDAO {
     }
     public double getDoanhThuTheoThang(String thangmua){
         double doanhThu = 0;
-        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%m', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong)" +
+                " as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon" +
+                "  inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%m',?)" +
+                "  group by HoaDonChiTiet.masach)";
         Cursor c = db.rawQuery(sSQL, new String[]{thangmua});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
@@ -69,7 +75,10 @@ public class HoaDonChiTietDAO {
     }
     public double getDoanhThuTheoNam(String nammua){
         double doanhThu = 0;
-        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong) as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%Y', HoaDon.ngaymua=?)  group by HoaDonChiTiet.masach)";
+        String sSQL = "select sum(tongtien) from(select sum(Sach.giabia* HoaDonChiTiet.soLuong)" +
+                " as tongtien from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon" +
+                "  inner join Sach on Sach.masach=HoaDonChiTiet.masach where strftime('%Y',?)" +
+                "  group by HoaDonChiTiet.masach)";
         Cursor c = db.rawQuery(sSQL, new String[]{nammua});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
