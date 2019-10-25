@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -124,7 +125,8 @@ public class FragmentNgay extends Fragment {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-
+//                int index=
+//                Toast.makeText(context, , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -132,6 +134,7 @@ public class FragmentNgay extends Fragment {
 
             }
         });
+
     }
 
     private ArrayList<PieEntry> dataValue1() {
@@ -144,4 +147,6 @@ public class FragmentNgay extends Fragment {
 
         return list;
     }
+
+
 }
