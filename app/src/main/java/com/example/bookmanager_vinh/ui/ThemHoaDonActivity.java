@@ -19,12 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.LvThemHoaDonAdapter;
 import com.example.bookmanager_vinh.adapter.SpThemHoaDonAdapter;
+import com.example.bookmanager_vinh.dao.HoaDonDAO;
 import com.example.bookmanager_vinh.dao.SachDAO;
 import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +44,9 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     Button btnThemVaoGioHang, btnXemHoaDon;
     LvThemHoaDonAdapter lvThemHoaDonAdapter;
     Intent intentXemHoaDon;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    HoaDonDAO hoaDonDAO;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    List<HoaDon> listHoaDon;
     Date date;
 
 
@@ -65,42 +69,51 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnThemVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Sach sach = (Sach) spinner.getSelectedItem();
-                if (listHoaDonChiTietDraft.size() > 0) {
-                    int index = -1;
-                    for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
-                        if (sach.getMasach().equals(listHoaDonChiTietDraft.get(i).getSach().getMasach())) {
-                            index = i;
-                            break;
+                if (edNgayMua.getText().toString().equals("") || edSoLuong.getText().toString().equals("") || edMaHD.getText().toString().equals("")) {
+                    Toast.makeText(ThemHoaDonActivity.this, "Vui lòng điền đầy đủ các trường !", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (getIndexOfmahoadon(edMaHD.getText().toString()) != -1) {
+                    Toast.makeText(ThemHoaDonActivity.this, "Mã hóa đơn đã tồn tại !", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    final Sach sach = (Sach) spinner.getSelectedItem();
+                    if (listHoaDonChiTietDraft.size() > 0) {
+                        int index = -1;
+                        for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
+                            if (sach.getMasach().equals(listHoaDonChiTietDraft.get(i).getSach().getMasach())) {
+                                index = i;
+                                break;
+                            }
                         }
-                    }
-                    if (index >= 0) {
-                        int tongSoLuongSach = listHoaDonChiTietDraft.get(index).getSach().getSoluong();
-                        if ((listHoaDonChiTietDraft.get(index).getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString())) > tongSoLuongSach) {
-                            Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách tối đa mà bạn có thể mua là " + (tongSoLuongSach - listHoaDonChiTietDraft.get(index).getSoLuongMua()) + "", Toast.LENGTH_SHORT).show();
-                            return;
+                        if (index >= 0) {
+                            int tongSoLuongSach = listHoaDonChiTietDraft.get(index).getSach().getSoluong();
+                            if ((listHoaDonChiTietDraft.get(index).getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString())) > tongSoLuongSach) {
+                                Toast.makeText(ThemHoaDonActivity.this, "Số lượng sách tối đa mà bạn có thể mua là " + (tongSoLuongSach - listHoaDonChiTietDraft.get(index).getSoLuongMua()) + "", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                HoaDonChiTiet hoaDonChiTiet = listHoaDonChiTietDraft.get(index);
+                                int soLuong = hoaDonChiTiet.getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString());
+                                HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDonChiTiet.getHoaDon(),
+                                        sach, soLuong);
+                                listHoaDonChiTietDraft.set(index, hoaDonChiTiet1);
+                                lvThemHoaDonAdapter.notifyDataSetChanged();
+                            }
+
+
                         } else {
-                            HoaDonChiTiet hoaDonChiTiet = listHoaDonChiTietDraft.get(index);
-                            int soLuong = hoaDonChiTiet.getSoLuongMua() + Integer.parseInt(edSoLuong.getText().toString());
-                            HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet(hoaDonChiTiet.getHoaDon(),
-                                    sach, soLuong);
-                            listHoaDonChiTietDraft.set(index, hoaDonChiTiet1);
-                            lvThemHoaDonAdapter.notifyDataSetChanged();
+                            themVaoGioHang();
                         }
-
-
                     } else {
                         themVaoGioHang();
+
                     }
-                } else {
-                    themVaoGioHang();
+
 
                 }
 
 
             }
         });
-
         btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +137,17 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private int getIndexOfmahoadon(String toString) {
+        int index = -1;
+        for (int i = 0; i < listHoaDon.size(); i++) {
+            if (listHoaDon.get(i).getMaHoaDon().equals(toString)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     private void themVaoGioHang() {
@@ -152,6 +176,14 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         listHoaDonChiTietDraft = new ArrayList<>();
         btnThemVaoGioHang = findViewById(R.id.btnThemGioHang);
         btnXemHoaDon = findViewById(R.id.btnXemHoaDon);
+        hoaDonDAO = new HoaDonDAO(this);
+        listHoaDon = new ArrayList<>();
+        try {
+            listHoaDon = hoaDonDAO.getAllHoaDon();
+        } catch (ParseException e) {
+            Toast.makeText(this, "Không thể lấy list hóa đơn ", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void iconBack() {
@@ -176,11 +208,12 @@ public class ThemHoaDonActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
-        edNgayMua.setText(year + "-" + month + "-" + day);
+//        Calendar calendar = Calendar.getInstance();
+////        int day = calendar.get(Calendar.DAY_OF_MONTH);
+////        int month = calendar.get(Calendar.MONTH) + 1;
+////        int year = calendar.get(Calendar.YEAR);
+        Date date=Calendar.getInstance().getTime();
+        edNgayMua.setText(simpleDateFormat.format(date));
         edNgayMua.setEnabled(false);
 
     }
