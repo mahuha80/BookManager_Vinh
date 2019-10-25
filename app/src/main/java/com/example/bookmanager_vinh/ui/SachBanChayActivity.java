@@ -39,15 +39,20 @@ public class SachBanChayActivity extends AppCompatActivity {
         iconBack();
         sachDAO = new SachDAO(this);
         listSach = new ArrayList<>();
-        if (edSachBanChay.getText().toString().equals("")) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ các trường ", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            btnSachBanChay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String month = edSachBanChay.getText().toString();
-                    listSach = sachDAO.getSachTop10(month);
+
+        btnSachBanChay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edSachBanChay.getText().toString().equals("")) {
+                    Toast.makeText(SachBanChayActivity.this, "Vui lòng điền đầy đủ các trường ", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    try {
+                        String month = edSachBanChay.getText().toString();
+                        listSach = sachDAO.getSachTop10(month);
+                    }catch (Exception e){
+                        Toast.makeText(SachBanChayActivity.this, "Vui lòng nhập đúng tháng ", Toast.LENGTH_SHORT).show();
+                    }
                     if (listSach.size() > 0) {
                         lvQLySachAdapter = new LvQLySachAdapter(SachBanChayActivity.this, listSach);
                         lvSachBanChay.setAdapter(lvQLySachAdapter);
@@ -58,8 +63,8 @@ public class SachBanChayActivity extends AppCompatActivity {
                     }
 
                 }
-            });
-        }
+            }
+        });
     }
 
     private void iconBack() {

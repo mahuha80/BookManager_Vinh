@@ -11,6 +11,7 @@ import com.example.bookmanager_vinh.database.DatabaseHelper;
 import com.example.bookmanager_vinh.model.HoaDon;
 import com.example.bookmanager_vinh.model.HoaDonChiTiet;
 import com.example.bookmanager_vinh.model.Sach;
+import com.example.bookmanager_vinh.model.ThongKe;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,20 +61,24 @@ public class HoaDonChiTietDAO {
         return doanhThu;
     }
 
-//    public List getTungMaDoanhThuTheoNgay() throws ParseException {
-//        List<HoaDonChiTiet> listHoaDonChiTiet = new ArrayList<>();
-//        double doanhThu = 0;
-//        String sSQL = "Select HoaDonChiTiet.hoadon,HoaDonChiTiet.sach,HoaDonChiTiet.soluongmua as tongtien from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%d',HoaDon.ngaymua)=strftime('%d',date('now'))";
-//        Cursor c = db.rawQuery(sSQL, null);
-//        c.moveToFirst();
-//        while (c.isAfterLast() == false) {
-//            HoaDon hoaDon = new HoaDon(c.getString(0), simpleDateFormat.parse(c.getString(0)));
-//            Sach sach=new Sach()
-//            c.moveToNext();
-//        }
-//        c.close();
-//        return null;
-//    }
+    public List getTungMaDoanhThuTheoNgay() throws ParseException {
+        List<ThongKe> listThongKeTheoNgay = new ArrayList<>();
+        String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDonChiTiet.mahdct,HoaDon.ngaymua,(Sach.giabia*HoaDonChiTiet.soluong) as tongtien,HoaDonChiTiet.masach from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%d',HoaDon.ngaymua)=strftime('%d',date('now'))";
+        Cursor c = db.rawQuery(sSQL, null);
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            String mahoadon = c.getString(0);
+            String mahdct = c.getString(1);
+            String ngaymua = c.getString(2);
+            String tongtien = c.getString(3);
+            String masach = c.getString(4);
+            ThongKe thongKe = new ThongKe(mahoadon, mahdct, ngaymua, tongtien, masach);
+            listThongKeTheoNgay.add(thongKe);
+            c.moveToNext();
+        }
+        c.close();
+        return listThongKeTheoNgay;
+    }
 
     public double getDoanhThuTheoThang() {
         double doanhThu = 0;
