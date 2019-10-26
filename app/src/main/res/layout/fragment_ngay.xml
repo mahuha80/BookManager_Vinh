@@ -4,10 +4,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pcNgay"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:src="@drawable/bill" />
+
+    <RelativeLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edFragmentNgay"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:ems="12"
+            android:layout_alignBottom="@id/btnFragmentNgay"/>
+
+        <ImageView
+            android:id="@+id/imgCalendar"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_toLeftOf="@id/btnFragmentNgay"
+            android:src="@drawable/calendar"
+            android:layout_alignBottom="@id/btnFragmentNgay"
+            android:paddingBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnFragmentNgay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Tìm"
+            android:layout_marginLeft="8dp"/>
+    </RelativeLayout>
+
+    <ListView
+        android:layout_marginLeft="16dp"
+        android:id="@+id/lvFragmentNgay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

@@ -61,21 +61,20 @@ public class HoaDonChiTietDAO {
         return doanhThu;
     }
 
-    public List getTungMaDoanhThuTheoNgay() throws ParseException {
+    public List getTungMaDoanhThuTheoNgay(String ngay) throws ParseException {
         List<ThongKe> listThongKeTheoNgay = new ArrayList<>();
-        String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDonChiTiet.mahdct,HoaDon.ngaymua,(Sach.giabia*HoaDonChiTiet.soluong) as tongtien,HoaDonChiTiet.masach from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%d',HoaDon.ngaymua)=strftime('%d',date('now'))";
-        Cursor c = db.rawQuery(sSQL, null);
+        String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua ,sum((Sach.giabia*HoaDonChiTiet.soluong)) as tongtien from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%d',HoaDon.ngaymua)=strftime('%d',?) group by HoaDonChiTiet.mahoadon,HoaDon.ngaymua";
+        Cursor c = db.rawQuery(sSQL, new String[]{ngay});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            String mahoadon = c.getString(0);
-            String mahdct = c.getString(1);
-            String ngaymua = c.getString(2);
-            String tongtien = c.getString(3);
-            String masach = c.getString(4);
-            ThongKe thongKe = new ThongKe(mahoadon, mahdct, ngaymua, tongtien, masach);
+            String mahoadon = c.getString(c.getColumnIndex("mahoadon"));
+            String ngaymua = c.getString(c.getColumnIndex("ngaymua"));
+            String tongtien = c.getString(c.getColumnIndex("tongtien"));
+            ThongKe thongKe = new ThongKe(mahoadon, ngaymua, tongtien);
             listThongKeTheoNgay.add(thongKe);
             c.moveToNext();
         }
+//        Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua,(Sach.giabia*HoaDonChiTiet.soluong) as tongtien,HoaDonChiTiet.masach from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%Y %m %d',HoaDon.ngaymua)=strftime('%Y %m %d','2019-10-23')
         c.close();
         return listThongKeTheoNgay;
     }

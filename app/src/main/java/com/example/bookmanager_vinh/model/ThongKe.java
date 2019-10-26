@@ -15,6 +15,12 @@ public class ThongKe {
         this.masach = masach;
     }
 
+    public ThongKe(String mahoadon, String ngaymua, String tongtien) {
+        this.mahoadon = mahoadon;
+        this.ngaymua = ngaymua;
+        this.tongtien = tongtien;
+    }
+
     public String getMahoadon() {
         return mahoadon;
     }

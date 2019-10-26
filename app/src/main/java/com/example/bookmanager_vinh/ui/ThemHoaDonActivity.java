@@ -117,21 +117,23 @@ public class ThemHoaDonActivity extends AppCompatActivity {
         btnXemHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentXemHoaDon = new Intent(ThemHoaDonActivity.this, XemHoaDonActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("mahoadon", edMaHD.getText().toString());
-                bundle.putString("ngaymua", edNgayMua.getText().toString());
-                List<Sach> sachHoaDon = new ArrayList<>();
-                ArrayList<Integer> soLuong = new ArrayList<>();
-                for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
-                    Sach sach = listHoaDonChiTietDraft.get(i).getSach();
-                    sachHoaDon.add(sach);
-                    soLuong.add(listHoaDonChiTietDraft.get(i).getSoLuongMua());
+                if(listHoaDonChiTietDraft.size()>0){
+                    intentXemHoaDon = new Intent(ThemHoaDonActivity.this, XemHoaDonActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mahoadon", edMaHD.getText().toString());
+                    bundle.putString("ngaymua", edNgayMua.getText().toString());
+                    List<Sach> sachHoaDon = new ArrayList<>();
+                    ArrayList<Integer> soLuong = new ArrayList<>();
+                    for (int i = 0; i < listHoaDonChiTietDraft.size(); i++) {
+                        Sach sach = listHoaDonChiTietDraft.get(i).getSach();
+                        sachHoaDon.add(sach);
+                        soLuong.add(listHoaDonChiTietDraft.get(i).getSoLuongMua());
+                    }
+                    intentXemHoaDon.putIntegerArrayListExtra("soLuong", soLuong);
+                    intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
+                    intentXemHoaDon.putExtra("Bundle", bundle);
+                    startActivity(intentXemHoaDon);
                 }
-                intentXemHoaDon.putIntegerArrayListExtra("soLuong", soLuong);
-                intentXemHoaDon.putExtra("list", (Serializable) sachHoaDon);
-                intentXemHoaDon.putExtra("Bundle", bundle);
-                startActivity(intentXemHoaDon);
 
             }
         });

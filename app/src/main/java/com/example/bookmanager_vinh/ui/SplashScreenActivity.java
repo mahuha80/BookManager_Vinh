@@ -26,7 +26,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         CountDownTimer countDownTimer = new CountDownTimer(1500, 1500) {
             @Override
             public void onTick(long l) {
-                Toast.makeText(SplashScreenActivity.this, "onTick", Toast.LENGTH_SHORT).show();
 
             }
 
