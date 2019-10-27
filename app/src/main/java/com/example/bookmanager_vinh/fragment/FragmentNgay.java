@@ -2,14 +2,13 @@ package com.example.bookmanager_vinh.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,29 +19,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookmanager_vinh.R;
 import com.example.bookmanager_vinh.adapter.LvThongKeHoaDonFragmentAdapter;
 import com.example.bookmanager_vinh.dao.HoaDonChiTietDAO;
 import com.example.bookmanager_vinh.model.ThongKe;
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.example.bookmanager_vinh.ui.XemHoaDonChiTiet;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.github.mikephil.charting.animation.Easing.EasingOption.EaseInOutQuad;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FragmentNgay extends Fragment {
@@ -112,7 +100,7 @@ public class FragmentNgay extends Fragment {
             public void onClick(View v) {
                 int size = 0;
                 try {
-                    listThongKe = hoaDonChiTietDAO.getTungMaDoanhThuTheoNgay(edFragmentNgay.getText().toString());
+                    listThongKe = hoaDonChiTietDAO.getTungHoaDonTheoNgay(edFragmentNgay.getText().toString());
                 } catch (ParseException e) {
                     Toast.makeText(context, "sai r", Toast.LENGTH_SHORT).show();
                 }
@@ -120,10 +108,19 @@ public class FragmentNgay extends Fragment {
                 if (listThongKe.size() > 0) {
                     lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
                     lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(getActivity(), XemHoaDonChiTiet.class);
+                            intent.putExtra("mahoadon", listThongKe.get(position).getMahoadon());
+                            startActivity(intent);
+                        }
+                    });
                 } else {
                     listThongKe.clear();
                     lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
-                    lv.setAdapter(lvThongKeHoaDonFragmentAdapter);                }
+                    lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
+                }
             }
         });
 

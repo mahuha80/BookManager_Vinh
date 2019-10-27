@@ -49,9 +49,9 @@ public class LvThongKeHoaDonFragmentAdapter extends BaseAdapter {
         }else{
             thongKeHolder= (ThongKeHolder) convertView.getTag();
         }
-        thongKeHolder.tvTime.setText(listThongKe.get(position).getNgaymua());
-        thongKeHolder.tvTongTien.setText(listThongKe.get(position).getTongtien());
-        thongKeHolder.tvMHD.setText(listThongKe.get(position).getMahoadon());
+        thongKeHolder.tvTime.setText("Ngày mua: "+listThongKe.get(position).getNgaymua());
+        thongKeHolder.tvTongTien.setText("Tổng tiền: "+listThongKe.get(position).getTongtien());
+        thongKeHolder.tvMHD.setText("Mã hóa đơn: "+listThongKe.get(position).getMahoadon());
         return convertView;
     }
     public class ThongKeHolder{

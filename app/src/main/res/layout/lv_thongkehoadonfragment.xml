@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/imgbill"
             android:paddingTop="8dp"
-            android:id="@+id/tvMHD" />
+            android:id="@+id/tvMHD"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -42,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/imgTotal"
             android:paddingTop="8dp"
-           android:id="@+id/tvTongTienMHD" />
+           android:id="@+id/tvTongTienMHD"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -62,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/imgTime"
             android:paddingTop="8dp"
-            android:id="@+id/tvTimeMHD"/>
+            android:id="@+id/tvTimeMHD"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
 </LinearLayout>

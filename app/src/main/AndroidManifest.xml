@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ThongKeActivity"></activity>
+        <activity android:name=".ui.XemHoaDonChiTiet"></activity>
+        <activity android:name=".ui.ThongKeActivity" />
         <activity android:name=".ui.SachBanChayActivity" />
         <activity android:name=".ui.ThemHoaDonActivity" />
         <activity android:name=".ui.XemHoaDonActivity" />

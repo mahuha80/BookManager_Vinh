@@ -10,7 +10,7 @@
         android:src="@drawable/bill" />
 
     <RelativeLayout
-        android:layout_width="360dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content">
 
         <EditText
@@ -18,8 +18,9 @@
             android:layout_width="216dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:ems="12"
-            android:layout_alignBottom="@id/btnFragmentNgay"/>
+            android:ems="20"
+            android:layout_alignBottom="@id/btnFragmentNgay"
+            android:textAlignment="center"/>
 
         <ImageView
             android:id="@+id/imgCalendar"

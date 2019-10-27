@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="40dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIcon1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvmahdct"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/imgIcon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgIcon1"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIcon4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon3"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvMaSachmhdct"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/imgIcon4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgIcon4"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIcon2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon1"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvsoluongmhdct"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/imgIcon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgIcon2"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgIcon3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon2"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvgiabiamhdct"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/imgIcon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgIcon3"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -61,7 +61,7 @@ public class HoaDonChiTietDAO {
         return doanhThu;
     }
 
-    public List getTungMaDoanhThuTheoNgay(String ngay) throws ParseException {
+    public List getTungHoaDonTheoNgay(String ngay) throws ParseException {
         List<ThongKe> listThongKeTheoNgay = new ArrayList<>();
         String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua ,sum((Sach.giabia*HoaDonChiTiet.soluong)) as tongtien from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%d',HoaDon.ngaymua)=strftime('%d',?) group by HoaDonChiTiet.mahoadon,HoaDon.ngaymua";
         Cursor c = db.rawQuery(sSQL, new String[]{ngay});
@@ -77,6 +77,23 @@ public class HoaDonChiTietDAO {
 //        Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua,(Sach.giabia*HoaDonChiTiet.soluong) as tongtien,HoaDonChiTiet.masach from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%Y %m %d',HoaDon.ngaymua)=strftime('%Y %m %d','2019-10-23')
         c.close();
         return listThongKeTheoNgay;
+    }
+
+    public List<ThongKe> getChiTietHoaDonTheoMaHoaDon(String mahoadon) {
+        List<ThongKe> listThongKe = new ArrayList<>();
+        String sSQL = "select HoaDonChiTiet.mahdct,HoaDonChiTiet.masach,HoaDonChiTiet.soluong,Sach.giabia from HoaDonChiTiet inner join Sach on Sach.masach=HoaDonChiTiet.masach where HoaDonChiTiet.mahoadon=?";
+        Cursor cursor = db.rawQuery(sSQL, new String[]{mahoadon});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String mahdct = cursor.getString(0);
+            String masach = cursor.getString(1);
+            String soluong = cursor.getString(2);
+            String giabia = cursor.getString(3);
+            ThongKe thongKe = new ThongKe(mahdct, masach, soluong, giabia);
+            listThongKe.add(thongKe);
+            cursor.moveToNext();
+        }
+        return listThongKe;
     }
 
     public double getDoanhThuTheoThang() {
