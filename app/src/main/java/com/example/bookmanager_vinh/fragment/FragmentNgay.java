@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class FragmentNgay extends Fragment {
     Button btnTim;
     ListView lv;
     List<ThongKe> listThongKe;
+    TextView tvTongDoanhThuTheoNgay;
     LvThongKeHoaDonFragmentAdapter lvThongKeHoaDonFragmentAdapter;
 
     @Override
@@ -69,6 +71,7 @@ public class FragmentNgay extends Fragment {
         imgCalendar = view.findViewById(R.id.imgCalendar);
         btnTim = view.findViewById(R.id.btnFragmentNgay);
         lv = view.findViewById(R.id.lvFragmentNgay);
+        tvTongDoanhThuTheoNgay=view.findViewById(R.id.tvTongDoanhThuTheoNgay);
         return view;
     }
 
@@ -108,6 +111,12 @@ public class FragmentNgay extends Fragment {
                 if (listThongKe.size() > 0) {
                     lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
                     lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
+                    double tongDoanhThu=0;
+                    for(int i=0;i<listThongKe.size();i++){
+                        double doanhthu= Double.parseDouble(listThongKe.get(i).getTongtien());
+                        tongDoanhThu+=doanhthu;
+                    }
+                    tvTongDoanhThuTheoNgay.setText("Tổng doanh thu theo ngày là :"+tongDoanhThu);
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -117,6 +126,7 @@ public class FragmentNgay extends Fragment {
                         }
                     });
                 } else {
+                    tvTongDoanhThuTheoNgay.setText("");
                     listThongKe.clear();
                     lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
                     lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
