@@ -8,9 +8,21 @@ public class ThongKe {
     private String masach;
     private String soluong;
     private String giabia;
+    private String tongdoanhthuthang;
 
+    public ThongKe(String tongdoanhthuthang) {
+        this.tongdoanhthuthang = tongdoanhthuthang;
+    }
 
-    public ThongKe( String mahoadonchitiet, String masach, String soluong, String giabia) {
+    public String getTongdoanhthuthang() {
+        return tongdoanhthuthang;
+    }
+
+    public void setTongdoanhthuthang(String tongdoanhthuthang) {
+        this.tongdoanhthuthang = tongdoanhthuthang;
+    }
+
+    public ThongKe(String mahoadonchitiet, String masach, String soluong, String giabia) {
         this.mahoadonchitiet = mahoadonchitiet;
         this.masach = masach;
         this.soluong = soluong;

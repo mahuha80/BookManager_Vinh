@@ -1,6 +1,9 @@
 package com.example.bookmanager_vinh.fragment;
 
+import android.os.Build;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -10,16 +13,17 @@ public class FragmentNode extends FragmentPagerAdapter {
         super(fm);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                return new FragmentNgay();
+                return new FragmentThongKeDoanhThuTheoNgay();
             case 1:
-                return new FragmentThang();
+                return new FragmentThongKeDoanhThuTGCT();
             case 2:
-                return new FragmentNam();
+                return new FragmentThongKeDoanhThuTheoNam();
         }
         return null;
     }

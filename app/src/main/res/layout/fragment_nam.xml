@@ -3,9 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Day la fragment nam" />
+        android:id="@+id/tvTongDoanhThuNam"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#673AB7"
+        android:layout_marginBottom="8dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/BcNam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

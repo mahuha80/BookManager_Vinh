@@ -34,7 +34,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
-public class FragmentNgay extends Fragment {
+public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
     HoaDonChiTietDAO hoaDonChiTietDAO;
     private Context context;
     EditText edFragmentNgay;
@@ -71,7 +71,7 @@ public class FragmentNgay extends Fragment {
         imgCalendar = view.findViewById(R.id.imgCalendar);
         btnTim = view.findViewById(R.id.btnFragmentNgay);
         lv = view.findViewById(R.id.lvFragmentNgay);
-        tvTongDoanhThuTheoNgay=view.findViewById(R.id.tvTongDoanhThuTheoNgay);
+        tvTongDoanhThuTheoNgay = view.findViewById(R.id.tvTongDoanhThuTheoNgay);
         return view;
     }
 
@@ -87,8 +87,13 @@ public class FragmentNgay extends Fragment {
         final DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                edFragmentNgay.setText(year + "-" + month + "-" + dayOfMonth);
+                if (month < 10) {
+                    edFragmentNgay.setText(year + "-" + "0" + month + "-" + dayOfMonth);
 
+                } else {
+                    edFragmentNgay.setText(year + "-" + month + "-" + dayOfMonth);
+
+                }
             }
         }, year, month, day);
         imgCalendar.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +108,7 @@ public class FragmentNgay extends Fragment {
             public void onClick(View v) {
                 int size = 0;
                 try {
-                    listThongKe = hoaDonChiTietDAO.getTungHoaDonTheoNgay(edFragmentNgay.getText().toString());
+                    listThongKe = hoaDonChiTietDAO.getHoaDonTheoNgay(edFragmentNgay.getText().toString());
                 } catch (ParseException e) {
                     Toast.makeText(context, "sai r", Toast.LENGTH_SHORT).show();
                 }
@@ -111,12 +116,12 @@ public class FragmentNgay extends Fragment {
                 if (listThongKe.size() > 0) {
                     lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
                     lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
-                    double tongDoanhThu=0;
-                    for(int i=0;i<listThongKe.size();i++){
-                        double doanhthu= Double.parseDouble(listThongKe.get(i).getTongtien());
-                        tongDoanhThu+=doanhthu;
+                    double tongDoanhThu = 0;
+                    for (int i = 0; i < listThongKe.size(); i++) {
+                        double doanhthu = Double.parseDouble(listThongKe.get(i).getTongtien());
+                        tongDoanhThu += doanhthu;
                     }
-                    tvTongDoanhThuTheoNgay.setText("Tổng doanh thu theo ngày là :"+tongDoanhThu);
+                    tvTongDoanhThuTheoNgay.setText("Tổng doanh thu theo ngày là :" + tongDoanhThu);
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
