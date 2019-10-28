@@ -20,9 +20,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         nguoiDungDAO = new NguoiDungDAO(this);
         boolean result = nguoiDungDAO.insertNguoiDung(new NguoiDung("admin", "admin", "0987395971", "Vinh NT", 1));
-        if (result) {
-            Toast.makeText(this, "thanh cong", Toast.LENGTH_SHORT).show();
-        }
         CountDownTimer countDownTimer = new CountDownTimer(1500, 1500) {
             @Override
             public void onTick(long l) {

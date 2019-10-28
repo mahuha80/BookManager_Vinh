@@ -106,32 +106,12 @@ public class NguoiDungActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e("VONGDOI", "onstop");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.e("VONG DOI", "onstop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.e("VONGDOI", "onrestart");
-
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("VONGDOI", "ONRESUME");
         listNguoiDung.clear();
         listNguoiDung = nguoiDungDAO.getAllNguoiDung();
-//        Collections.reverse(listNguoiDung);
         LVDanhSachNguoiDungAdapter.changeDataset(listNguoiDung);
 
     }

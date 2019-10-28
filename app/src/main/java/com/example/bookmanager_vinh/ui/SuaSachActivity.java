@@ -42,8 +42,6 @@ public class SuaSachActivity extends AppCompatActivity {
         Sach sach = (Sach) bundle.getSerializable("Sach");
 
         if (sach != null) {
-            Toast.makeText(this, "Co Sach", Toast.LENGTH_SHORT).show();
-            Log.e("AAA",sach.getMasach()+"  "+sach.getTensach()+sach.getTacgia());
             edMaSach.setText(sach.getMasach());
             edTenSach.setText(sach.getTensach());
             edTacGia.setText(sach.getTacgia());
@@ -69,8 +67,6 @@ public class SuaSachActivity extends AppCompatActivity {
         String nxv = edNXB.getText().toString();
         double gia = Double.parseDouble(edGia.getText().toString());
         int soLuong = Integer.parseInt(edSoLuong.getText().toString());
-        Log.e("BUGG", loaiSach.getMaTheLoai() + "");
-        Log.e("BUGG",maSach+" "+tenSach);
         long result = sachDAO.updateSach(new Sach(maSach, loaiSach.getMaTheLoai(), tenSach, tacGia, nxv, gia, soLuong));
         if(result>0){
             Toast.makeText(this, "Thanh Cong", Toast.LENGTH_SHORT).show();

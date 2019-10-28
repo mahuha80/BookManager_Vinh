@@ -55,7 +55,7 @@ public class HoaDonChiTietDAO {
 
     public List<ThongKe> getHoaDonTheoNgay(String ngay) throws ParseException {
         List<ThongKe> listThongKeTheoNgay = new ArrayList<>();
-        String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua ,sum((Sach.giabia*HoaDonChiTiet.soluong)) as tongtien from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%Y %m %d',HoaDon.ngaymua)=strftime('%Y %m %d',?) group by HoaDonChiTiet.mahoadon,HoaDon.ngaymua";
+        String sSQL = "Select HoaDonChiTiet.mahoadon,HoaDon.ngaymua ,sum((Sach.giabia*HoaDonChiTiet.soluong)) as tongtien from HoaDonChiTiet inner join Sach on HoaDonChiTiet.masach=Sach.masach inner join HoaDon on HoaDon.mahoadon=HoaDonChiTiet.mahoadon where strftime('%Y %m %d',HoaDon.ngaymua)=strftime('%Y %m %d',?) group by HoaDonChiTiet.mahoadon,HoaDon.ngaymua order by HoaDon.ngaymua asc";
         Cursor c = db.rawQuery(sSQL, new String[]{ngay});
         c.moveToFirst();
         while (c.isAfterLast() == false) {
@@ -98,21 +98,21 @@ public class HoaDonChiTietDAO {
         }
         return listThongKeTheoNgay;
     }
-    public List<ThongKe> getHoaDonTheoKhoangThoiGian(String mahoadon) {
-//        select HoaDonChiTiet.mahoadon,HoaDon.ngaymua,(HoaDonChiTiet.soluong*Sach.giabia) as tongtien from HoaDonChiTiet inner join HoaDon on HoaDonChiTiet.mahoadon=HoaDon.mahoadon inner join HoaDonChiTiet on HoaDonChiTiet.masach=Sach.masach where strftime('%Y %m %d',HoaDon.ngaymua) between strftime('%Y %m %d','2019-09-23') and strftime('%Y %m %d','2019-10-22')
+
+    public List<ThongKe> getHoaDonTheoKhoangThoiGian(String from, String to) {
         List<ThongKe> listThongKe = new ArrayList<>();
-        String sSQL = "select HoaDonChiTiet.mahdct,HoaDonChiTiet.masach,HoaDonChiTiet.soluong,Sach.giabia from HoaDonChiTiet inner join Sach on Sach.masach=HoaDonChiTiet.masach where HoaDonChiTiet.mahoadon=?";
-        Cursor cursor = db.rawQuery(sSQL, new String[]{mahoadon});
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            String mahdct = cursor.getString(0);
-            String masach = cursor.getString(1);
-            String soluong = cursor.getString(2);
-            String giabia = cursor.getString(3);
-            ThongKe thongKe = new ThongKe(mahdct, masach, soluong, giabia);
+        String sSQL = "select HoaDon.mahoadon,sum(HoaDonChiTiet.soluong*Sach.giabia) as tongtien,HoaDon.ngaymua from HoaDon inner join HoaDonChiTiet on HoaDon.mahoadon=HoaDonChiTiet.mahoadon inner join Sach on Sach.masach=HoaDonChiTiet.masach  where strftime('%Y %m %d',HoaDon.ngaymua) between strftime('%Y %m %d',?) and strftime('%Y %m %d',?) group by HoaDon.mahoadon,HoaDon.ngaymua order by HoaDon.ngaymua asc";
+        Cursor c = db.rawQuery(sSQL, new String[]{from, to});
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            String mahoadon = c.getString(c.getColumnIndex("mahoadon"));
+            String ngaymua = c.getString(c.getColumnIndex("ngaymua"));
+            String tongtien = c.getString(c.getColumnIndex("tongtien"));
+            ThongKe thongKe = new ThongKe(mahoadon, ngaymua, tongtien);
             listThongKe.add(thongKe);
-            cursor.moveToNext();
+            c.moveToNext();
         }
+        c.close();
         return listThongKe;
     }
 

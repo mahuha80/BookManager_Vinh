@@ -41,7 +41,7 @@ public class FragmentNode extends FragmentPagerAdapter {
             case 0:
                 return "Thống kê theo ngày";
             case 1:
-                return "Thống kê theo tháng";
+                return "Thống kê theo khoảng thời gian";
             case 2:
                 return "Thống kê theo năm";
 

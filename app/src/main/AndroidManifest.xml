@@ -9,15 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.XemHoaDonChiTiet"></activity>
-        <activity android:name=".ui.ThongKeActivity" />
-        <activity android:name=".ui.SachBanChayActivity" />
-        <activity android:name=".ui.ThemHoaDonActivity" />
-        <activity android:name=".ui.XemHoaDonActivity" />
-        <activity android:name=".ui.SuaTheLoaiActivity" />
-        <activity android:name=".ui.SuaSachActivity" />
-        <activity android:name=".ui.ThemTheLoaiActivity" />
-        <activity android:name=".ui.DoiMatKhauActivity" />
+        <activity
+            android:name=".ui.XemHoaDonChiTiet"
+            android:label="@string/xemHoaDon"></activity>
+        <activity
+            android:name=".ui.ThongKeActivity"
+            android:label="@string/thongKe" />
+        <activity
+            android:name=".ui.SachBanChayActivity"
+            android:label="@string/sachBanChay" />
+        <activity
+            android:name=".ui.ThemHoaDonActivity"
+            android:label="@string/hoaDonTitle" />
+        <activity
+            android:name=".ui.XemHoaDonActivity"
+            android:label="@string/thanhToan" />
+        <activity
+            android:name=".ui.SuaTheLoaiActivity"
+            android:label="@string/suaTheLoai" />
+        <activity
+            android:name=".ui.SuaSachActivity"
+            android:label="@string/suaSach" />
+        <activity
+            android:name=".ui.ThemTheLoaiActivity"
+            android:label="@string/themTheLoai" />
+        <activity
+            android:name=".ui.DoiMatKhauActivity"
+            android:label="@string/doiMatKhau" />
         <activity
             android:name=".ui.ThemSachActivity"
             android:label="@string/themSachTitle" />
@@ -35,8 +53,10 @@
             android:label="@string/nguoiDungTitle" />
         <activity
             android:name=".ui.ThemNguoiDungActivity"
-            android:label="@string/qlyNguoiDungTitle" />
-        <activity android:name=".ui.LoginActivity" />
+            android:label="@string/themNguoiDung" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/dangNhap" />
         <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

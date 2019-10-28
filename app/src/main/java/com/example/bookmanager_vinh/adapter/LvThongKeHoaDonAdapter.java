@@ -12,11 +12,11 @@ import com.example.bookmanager_vinh.model.ThongKe;
 
 import java.util.List;
 
-public class LvThongKeHoaDonFragmentAdapter extends BaseAdapter {
+public class LvThongKeHoaDonAdapter extends BaseAdapter {
     private Context context;
     private List<ThongKe> listThongKe;
 
-    public LvThongKeHoaDonFragmentAdapter(Context context, List<ThongKe> listThongKe) {
+    public LvThongKeHoaDonAdapter(Context context, List<ThongKe> listThongKe) {
         this.context = context;
         this.listThongKe = listThongKe;
     }

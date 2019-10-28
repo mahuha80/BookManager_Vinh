@@ -23,7 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookmanager_vinh.R;
-import com.example.bookmanager_vinh.adapter.LvThongKeHoaDonFragmentAdapter;
+import com.example.bookmanager_vinh.adapter.LvThongKeHoaDonAdapter;
 import com.example.bookmanager_vinh.dao.HoaDonChiTietDAO;
 import com.example.bookmanager_vinh.model.ThongKe;
 import com.example.bookmanager_vinh.ui.XemHoaDonChiTiet;
@@ -43,7 +43,7 @@ public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
     ListView lv;
     List<ThongKe> listThongKe;
     TextView tvTongDoanhThuTheoNgay;
-    LvThongKeHoaDonFragmentAdapter lvThongKeHoaDonFragmentAdapter;
+    LvThongKeHoaDonAdapter lvThongKeHoaDonAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -87,13 +87,20 @@ public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
         final DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String monthS = null;
+                String dayS;
                 if (month < 10) {
-                    edFragmentNgay.setText(year + "-" + "0" + month + "-" + dayOfMonth);
-
+                    monthS = "0" + month;
                 } else {
-                    edFragmentNgay.setText(year + "-" + month + "-" + dayOfMonth);
-
+                    monthS = month + "";
                 }
+                if (dayOfMonth < 10) {
+                    dayS = "0" + dayOfMonth;
+                } else {
+                    dayS = dayOfMonth + "";
+                }
+                edFragmentNgay.setText(year + "-" + monthS + "-" + dayS);
+
             }
         }, year, month, day);
         imgCalendar.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +113,6 @@ public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
         btnTim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int size = 0;
                 try {
                     listThongKe = hoaDonChiTietDAO.getHoaDonTheoNgay(edFragmentNgay.getText().toString());
                 } catch (ParseException e) {
@@ -114,8 +120,8 @@ public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
                 }
 
                 if (listThongKe.size() > 0) {
-                    lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
-                    lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
+                    lvThongKeHoaDonAdapter = new LvThongKeHoaDonAdapter(context, listThongKe);
+                    lv.setAdapter(lvThongKeHoaDonAdapter);
                     double tongDoanhThu = 0;
                     for (int i = 0; i < listThongKe.size(); i++) {
                         double doanhthu = Double.parseDouble(listThongKe.get(i).getTongtien());
@@ -133,8 +139,8 @@ public class FragmentThongKeDoanhThuTheoNgay extends Fragment {
                 } else {
                     tvTongDoanhThuTheoNgay.setText("");
                     listThongKe.clear();
-                    lvThongKeHoaDonFragmentAdapter = new LvThongKeHoaDonFragmentAdapter(context, listThongKe);
-                    lv.setAdapter(lvThongKeHoaDonFragmentAdapter);
+                    lvThongKeHoaDonAdapter = new LvThongKeHoaDonAdapter(context, listThongKe);
+                    lv.setAdapter(lvThongKeHoaDonAdapter);
                 }
             }
         });
